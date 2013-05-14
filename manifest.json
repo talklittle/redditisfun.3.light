@@ -1,0 +1,69 @@
+{
+    "id": "redditisfun.3.light",
+    "name": "reddit is fun 3.0 light",
+    
+    "version": 1,
+    
+    "android_theme": "Reddit_Light",
+    
+    "scripts": {
+        "posts_thread": {
+            "file": "thread_item.lua",
+            "new_view": "newView",
+            "bind_view": "bindView"
+        },
+        "posts_comment": {
+            "file": "profile_comment_item.lua",
+            "new_view": "newView",
+            "bind_view": "bindView"
+        },
+        
+        "comments_thread": {
+            "file": "thread_op.lua",
+            "new_view": "newView",
+            "bind_view": "bindView"
+        },
+        "comments_comment": {
+            "file": "comment_item.lua",
+            "new_view": "newView",
+            "bind_view": "bindView"
+        },
+        "comments_hidden_comment": {
+            "file": "hidden_comment_item.lua",
+            "new_view": "newView",
+            "bind_view": "bindView"
+        },
+        "comments_more": {
+            "file": "more_comments_item.lua",
+            "new_view": "newView",
+            "bind_view": "bindView"
+        },
+        
+        "profile_thread": {
+            "file": "profile_thread_item.lua",
+            "new_view": "newView",
+            "bind_view": "bindView"
+        },
+        "profile_comment": {
+            "file": "profile_comment_item.lua",
+            "new_view": "newView",
+            "bind_view": "bindView"
+        },
+        "profile_header": {
+            "file": "profile_header.lua",
+            "new_view": "newView",
+            "bind_view": "bindView"
+        },
+        
+        "inbox_message": {
+            "file": "inbox_message_item.lua",
+            "new_view": "newView",
+            "bind_view": "bindViewMessage"
+        },
+        "inbox_comment": {
+            "file": "inbox_message_item.lua",
+            "new_view": "newView",
+            "bind_view": "bindViewComment"
+        }
+    }
+}
