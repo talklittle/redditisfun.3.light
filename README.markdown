@@ -1,4 +1,4 @@
-[https://play.google.com/store/apps/details?id=com.andrewshu.android.reddit.beta](https://play.google.com/store/apps/details?id=com.andrewshu.android.reddit.beta)
+To opt into the beta, and try themes, [join the Google+ community](https://plus.google.com/communities/114050744871875290633) and then use the opt-in links in the community sidebar. Then Google Play will serve you the alpha/beta APKs.
 
 ![Screenshot 1](http://lh5.ggpht.com/c1JRaGylLJknG7_ErqtyHutyX6nvsSHTqA_oW8fdYcMRmJA8tJjJWjPekq7WpST3z7I
  "Screenshot 1")
