@@ -284,11 +284,22 @@ function newView(Builder)
 end
 
 local function bindTitleAndDomain(textView, Thing)
---    local titleColor = (Thing:isClicked() and "#333333" or "#000000")
+	local flairBackgroundColor = "#bfbfbf"
+	local flairSize = TEXT_SIZE_SMALL
     local titleColor = (Thing:isClicked() and "#551a8b" or "#0000ff")
 	local titleStyle = (Thing:isClicked() and "normal" or "bold")
 	local domainColor = "#7f7f7f"
 	local domainSize = TEXT_SIZE_SMALL
+	
+	-- link flair
+	local hasFlair = Thing:getLink_flair_text() and Thing:getLink_flair_text():len() > 0
+	local flairBuilder
+	if hasFlair then
+		flairBuilder = Spans:addSize(Thing:getLink_flair_text(), flairSize)
+		flairBuilder = Spans:addBackgroundColor(flairBuilder, flairBackgroundColor)
+	else
+		flairBuilder = Spans:builder()  -- empty SpannableStringBuilder
+	end
     
     -- title
     local titleBuilder = Spans:addColor(Thing:getTitle(), titleColor)
@@ -299,7 +310,7 @@ local function bindTitleAndDomain(textView, Thing)
 	domainBuilder = Spans:addSize(domainBuilder, domainSize)
 	
 	-- combine
-	textView:setText(titleBuilder:append(" "):append(domainBuilder))
+	textView:setText(flairBuilder:append(hasFlair and " " or ""):append(titleBuilder):append(" "):append(domainBuilder))
 end
 
 local function getDefaultThumbnail(thumbnailUrl)
