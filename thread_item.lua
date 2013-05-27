@@ -284,7 +284,7 @@ function newView(Builder)
 end
 
 local function bindTitleAndDomain(textView, Thing)
-	local flairBackgroundColor = "#bfbfbf"
+	local flairBackgroundColor = "#dddddd"
 	local flairSize = TEXT_SIZE_SMALL
     local titleColor = (Thing:isClicked() and "#551a8b" or "#0000ff")
 	local titleStyle = (Thing:isClicked() and "normal" or "bold")
