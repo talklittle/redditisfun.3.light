@@ -393,6 +393,13 @@ function bindView(Holder, Thing, ListItem)
 	end
 	
 	-- selftext
+	if Thing:getRenderedSelftext() then
+		-- TODO catch ArrayIndexOutOfBoundsException
+		-- JellyBean bug http://code.google.com/p/android/issues/detail?id=34872
+		selftext:setText(Thing:getRenderedSelftext())
+	else
+		selftext:setText(Thing:getSelftext())
+	end
 	selftext:setVisible(Thing:getSelftext() and "" ~= Thing:getSelftext())
 	selftext:setMovementMethod("LinkMovementMethod")
 	

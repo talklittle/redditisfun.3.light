@@ -292,7 +292,7 @@ local function bindTitleAndDomain(textView, Thing)
 	local domainSize = TEXT_SIZE_SMALL
 	
 	-- link flair
-	local hasFlair = Thing:getLink_flair_text() and Thing:getLink_flair_text():len() > 0
+	local hasFlair = Thing:getLink_flair_text() and "" ~= Thing:getLink_flair_text()
 	local flairBuilder
 	if hasFlair then
 		flairBuilder = Spans:addSize(Thing:getLink_flair_text(), flairSize)
