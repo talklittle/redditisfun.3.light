@@ -3,8 +3,8 @@
     "name": "reddit is fun 3.0 light",
     
     "version": 5,
-    "app_version_code": 146,
-    "app_version_name": "3.0.0-alpha9",
+    "app_version_code": 147,
+    "app_version_name": "3.0.0-alpha10",
     "api_level": 8,
     
     "android_theme": "Reddit_Light",
