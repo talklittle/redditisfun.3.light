@@ -238,7 +238,8 @@ function bindView(Holder, Thing, ListItem)
 	voteUpButton:setDrawable(Thing:getLikes()==true and "up_arrow_red.png" or "up_arrow_holo_light.png")
 	voteDownButton:setDrawable(Thing:getLikes()==false and "down_arrow_blue.png" or "down_arrow_holo_light.png")
 
-	-- set Tag for clickable elements, except root container
+	-- set Tag for clickable elements
+	rootContainer:setTag(Thing)
 	Holder:getView("body"):setTag(Thing)
 	Holder:getView("more_actions"):setTag(Thing)
 	Holder:getView("permalink"):setTag(Thing)
