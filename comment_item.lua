@@ -280,8 +280,7 @@ function bindView(Holder, Thing, ListItem)
 	local prev = Holder:getView("prev")
 	local parent = Holder:getView("parent")
 
-	-- set Tag for clickable elements
-	rootContainer:setTag(Thing)
+	-- set Tag for clickable elements, except root container
 	Holder:getView("body"):setTag(Thing)
 	Holder:getView("hide_comment"):setTag(Thing)
 	next:setTag(Thing)
