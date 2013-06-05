@@ -321,17 +321,16 @@ end
 ---
 -- @usage exported
 function bindView(Holder, Thing, ListItem)
-    -- set Thing tag for each clickable View
-    -- (used for built-in reddit is fun methods)
-    Holder:getView("vote_up_button"):setTag(Thing)
-    Holder:getView("vote_down_button"):setTag(Thing)
-    Holder:getView("thread_info_layout"):setTag(Thing)
-    Holder:getView("thumbnail_frame"):setTag(Thing)
-    Holder:getView("share"):setTag(Thing)
-    Holder:getView("save"):setTag(Thing)
-    Holder:getView("hide"):setTag(Thing)
-    Holder:getView("more_actions"):setTag(Thing)
-    Holder:getView("comments"):setTag(Thing)
+    -- set click data for clickable elements that delegate to Java
+    Holder:getView("vote_up_button"):setClickData(Thing)
+    Holder:getView("vote_down_button"):setClickData(Thing)
+    Holder:getView("thread_info_layout"):setClickData(Thing)
+    Holder:getView("thumbnail_frame"):setClickData(Thing)
+    Holder:getView("share"):setClickData(Thing)
+    Holder:getView("save"):setClickData(Thing)
+    Holder:getView("hide"):setClickData(Thing)
+    Holder:getView("more_actions"):setClickData(Thing)
+    Holder:getView("comments"):setClickData(Thing)
     
     bindTitleAndDomain(Holder:getView("title"), Thing)
     

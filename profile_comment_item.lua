@@ -238,14 +238,14 @@ function bindView(Holder, Thing, ListItem)
 	voteUpButton:setDrawable(Thing:getLikes()==true and "up_arrow_red.png" or "up_arrow_holo_light.png")
 	voteDownButton:setDrawable(Thing:getLikes()==false and "down_arrow_blue.png" or "down_arrow_holo_light.png")
 
-	-- set Tag for clickable elements
-	rootContainer:setTag(Thing)
-	Holder:getView("body"):setTag(Thing)
-	Holder:getView("more_actions"):setTag(Thing)
-	Holder:getView("permalink"):setTag(Thing)
-	Holder:getView("context"):setTag(Thing)
-	voteUpButton:setTag(Thing)
-	voteDownButton:setTag(Thing)
+	-- set click data for clickable elements that delegate to Java
+	rootContainer:setClickData(Thing)
+	Holder:getView("body"):setClickData(Thing)
+	Holder:getView("more_actions"):setClickData(Thing)
+	Holder:getView("permalink"):setClickData(Thing)
+	Holder:getView("context"):setClickData(Thing)
+	voteUpButton:setClickData(Thing)
+	voteDownButton:setClickData(Thing)
 	
 	-- indentation
 	for i = 1,8 do
