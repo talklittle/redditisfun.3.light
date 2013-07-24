@@ -212,6 +212,8 @@ local function bindViewCommon(Holder, Thing, ListItem)
 		else
 			fromUserView:setText("from " .. author)
 		end
+	else
+		fromUserView:setVisible(false)
 	end
     
     local viaSubredditView = Holder:getView("via_subreddit")
