@@ -101,7 +101,7 @@ function newView(Builder)
                     Builder:endLinearLayout()
                     
                     local body = Builder:addTextView("body")
-                    body:setLayoutSize("wrap_content", "wrap_content")
+                    body:setLayoutSize("fill_parent", "wrap_content")
                     body:setBackground(ACTIONBAR_ITEM_BACKGROUND)
                     body:setOnClick("onListItemClick")
 					body:setClickable(true)
