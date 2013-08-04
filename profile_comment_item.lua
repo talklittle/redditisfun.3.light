@@ -126,6 +126,7 @@ function newView(Builder)
 	                flair:setVisibility("gone")
 	                flair:setTextSize(TEXT_SIZE_SMALL)
 	                flair:setTextColor(TEXT_COLOR_SECONDARY)
+	                flair:setBackground("#dfdfdf")
 	                flair:setSingleLine()
 	                local num_points = Builder:addTextView("num_points")
 	                num_points:setLayoutSize("wrap_content", "wrap_content")
@@ -238,9 +239,11 @@ function bindView(Holder, Thing, ListItem)
 	voteUpButton:setDrawable(Thing:getLikes()==true and "up_arrow_red.png" or "up_arrow_holo_light.png")
 	voteDownButton:setDrawable(Thing:getLikes()==false and "down_arrow_blue.png" or "down_arrow_holo_light.png")
 
+	local body = Holder:getView("body")
+
 	-- set click data for clickable elements that delegate to Java
 	rootContainer:setClickData(Thing)
-	Holder:getView("body"):setClickData(Thing)
+	body:setClickData(Thing)
 	Holder:getView("more_actions"):setClickData(Thing)
 	Holder:getView("permalink"):setClickData(Thing)
 	Holder:getView("context"):setClickData(Thing)
@@ -291,8 +294,27 @@ function bindView(Holder, Thing, ListItem)
 	Holder:getView("num_points"):setText(string.format(score==1 and "%d point" or "%d points", score))
 	Holder:getView("submission_time"):setText(Thing:getCreatedTimeAgo())
 	Holder:getView("comment_gild"):setVisible(Thing:getGilded() > 0)
+	
+	-- flair
+	local flairView = Holder:getView("flair")
+	local flair
+	local flairText = Thing:getAuthor_flair_text()
+	local flairCssClass = Thing:getAuthor_flair_css_class()
+	if flairText ~= nil and "" ~= flairText then
+		flair = flairText
+	elseif (flairCssClass ~= nil and "" ~= flairCssClass) then
+		flair = flairCssClass
+	else
+		flair = nil
+	end
+	
+	if flair ~= nil then
+		flairView:setVisible(true)
+		flairView:setText(flair)
+	else
+		flairView:setVisible(false)
+	end
 
-	local body = Holder:getView("body")
 	if Thing:getRenderedBody() then
 		-- TODO catch ArrayIndexOutOfBoundsException
 		-- JellyBean bug http://code.google.com/p/android/issues/detail?id=34872
