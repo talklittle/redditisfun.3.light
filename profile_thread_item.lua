@@ -120,7 +120,7 @@ function newView(Builder)
                 title:setLayoutSize("wrap_content", "wrap_content")
                 title:setLayoutMarginBottom("1dip")
                 title:setText("Placeholder title")
-                title:setTextSize(TEXT_SIZE_MEDIUM)
+                title:setTextSize(TEXT_SIZE_LARGE)
     
                 local view5 = Builder:beginLinearLayout("view5")
                 view5:setLayoutSize("wrap_content", "wrap_content")
