@@ -419,6 +419,10 @@ function bindView(Holder, Thing, ListItem)
 			thumbnail:setDrawable(DRAWABLE_THUMBNAIL_SELF)
 		else	
 			thumbnail:setVisibility("gone")
+			if thumbnail.cancelDisplayImage then
+				-- app version 3.1.0
+				thumbnail:cancelDisplayImage()
+			end
 			thumbnail_icon_frame:setVisibility("visible")
 			local urlLower = Thing:getUrl():lower()
 			local imageLabelText = getImageLabelText(urlLower)
