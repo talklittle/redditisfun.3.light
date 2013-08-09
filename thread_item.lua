@@ -445,7 +445,12 @@ function bindView(Holder, Thing, ListItem)
 	else
 		thumbnail_icon_frame:setVisibility("gone")
 		-- displayImageWithProgress will handle visibility of thumbnail and thumbnail_progress
-		thumbnail:displayImageWithProgress(Thing:getThumbnail(), thumbnail_progress)
+		if thumbnail.displayThumbnailImageWithProgress then
+			-- app version 3.1.0
+			thumbnail:displayThumbnailImageWithProgress(Thing:getThumbnail(), thumbnail_progress)
+		else
+			thumbnail:displayImageWithProgress(Thing:getThumbnail(), thumbnail_progress)
+		end
 	end
 	
 	local thread_actions = Holder:getView("thread_actions")

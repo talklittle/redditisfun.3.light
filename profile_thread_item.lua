@@ -319,6 +319,21 @@ local function getDefaultThumbnail(thumbnailUrl)
 end
 
 ---
+-- get the label text for image links
+local function getImageLabelText(urlLower)
+	local last4 = urlLower:sub(-4)
+	if last4 == ".jpg" or last4 == ".gif" or last4 == ".png" then
+		return last4:sub(2)
+	elseif urlLower:sub(-5) == ".jpeg" then
+		return "jpg"
+	elseif urlLower:sub(1, 17) == "http://imgur.com/" or urlLower:sub(1, 19) == "http://i.imgur.com/" then
+		return "imgur"
+	else
+		return nil
+	end
+end
+
+---
 -- @usage exported
 function bindView(Holder, Thing, ListItem)
     -- set click data for clickable elements that delegate to Java
@@ -392,22 +407,11 @@ function bindView(Holder, Thing, ListItem)
 			thumbnail:setVisibility("gone")
 			thumbnail_icon_frame:setVisibility("visible")
 			local urlLower = Thing:getUrl():lower()
-			local isDirectImage = 
-					urlLower:sub(-4) == ".jpg" or
-					urlLower:sub(-5) == ".jpeg" or
-					urlLower:sub(-4) == ".gif" or
-					urlLower:sub(-4) == ".png"
-			local isImgur = 
-					urlLower:sub(1, 17) == "http://imgur.com/" or
-					urlLower:sub(1, 19) == "http://i.imgur.com/"
-			if isDirectImage or isImgur then
+			local imageLabelText = getImageLabelText(urlLower)
+			if imageLabelText then
 				thumbnail_icon:setDrawable(DRAWABLE_IMAGE_LINK)
 				thumbnail_icon_label:setVisibility("visible")
-				if isDirectImage then
-					thumbnail_icon_label:setText(urlLower:sub(-3))
-				elseif isImgur then
-					thumbnail_icon_label:setText("imgur")
-				end
+				thumbnail_icon_label:setText(imageLabelText)
 			else
 				thumbnail_icon:setDrawable(DRAWABLE_WEB_LINK)
 				
@@ -427,7 +431,12 @@ function bindView(Holder, Thing, ListItem)
 	else
 		thumbnail_icon_frame:setVisibility("gone")
 		-- displayImageWithProgress will handle visibility of thumbnail and thumbnail_progress
-		thumbnail:displayImageWithProgress(Thing:getThumbnail(), thumbnail_progress)
+		if thumbnail.displayThumbnailImageWithProgress then
+			-- app version 3.1.0
+			thumbnail:displayThumbnailImageWithProgress(Thing:getThumbnail(), thumbnail_progress)
+		else
+			thumbnail:displayImageWithProgress(Thing:getThumbnail(), thumbnail_progress)
+		end
 	end
 	
 	--
