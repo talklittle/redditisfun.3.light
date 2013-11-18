@@ -292,7 +292,11 @@ function bindView(Holder, Thing, ListItem)
 	
 		
 	local score = Thing:getUps() - Thing:getDowns()
-	Holder:getView("num_points"):setText(string.format(score==1 and "%d point" or "%d points", score))
+    if Thing:isScore_hidden() then
+        Holder:getView("num_points"):setText("[~] points")
+    else
+        Holder:getView("num_points"):setText(string.format(score==1 and "%d point" or "%d points", score))
+    end
 	Holder:getView("submission_time"):setText(Thing:getCreatedTimeAgo())
 	Holder:getView("comment_gild"):setVisible(Thing:getGilded() > 0)
 	
