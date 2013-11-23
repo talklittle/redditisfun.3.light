@@ -254,8 +254,8 @@ end
 local function bindTitleAndDomain(textView, Thing)
 	local flairBackgroundColor = "#dddddd"
 	local flairSize = TEXT_SIZE_SMALL
-    local titleColor = (Thing:isClicked() and "#551a8b" or "#0000ff")
-	local titleStyle = (Thing:isClicked() and "normal" or "bold")
+    local titleColor = (Thing:isStickied() and "#669900" or (Thing:isClicked() and "#551a8b" or "#0000ff"))
+    local titleStyle = ((Thing:isClicked() and not Thing:isStickied()) and "normal" or "bold")
 	local domainColor = "#7f7f7f"
 	local domainSize = TEXT_SIZE_SMALL
 	
