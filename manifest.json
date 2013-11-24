@@ -8,6 +8,8 @@
     "api_level": 8,
     
     "android_theme": "Reddit_Light",
+
+    "ad_placement": "list",
     
     "scripts": {
         "posts_thread": {
