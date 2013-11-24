@@ -3,7 +3,7 @@ local TEXT_SIZE_LARGE = redditisfun.TEXT_SIZE_LARGE
 local TEXT_SIZE_MEDIUM = redditisfun.TEXT_SIZE_MEDIUM
 local TEXT_SIZE_SMALL = redditisfun.TEXT_SIZE_SMALL
 local TEXT_COLOR_SECONDARY = redditisfun.TEXT_COLOR_SECONDARY
-local ACTIONBAR_ITEM_BACKGROUND = redditisfun.ACTIONBAR_ITEM_BACKGROUND
+local SELECTABLE_ITEM_BACKGROUND = redditisfun.SELECTABLE_ITEM_BACKGROUND
 local Fonts = redditisfun.Fonts
 local Spans = redditisfun.Spans
 
@@ -65,14 +65,14 @@ function newView(Builder)
                     local voteUp = Builder:beginFrameLayout("vote_up_button")
                     voteUp:setLayoutSize("40dp", "wrap_content")
                     voteUp:setLayoutWeight(1.0)
-                    voteUp:setBackground(ACTIONBAR_ITEM_BACKGROUND)
+                    voteUp:setBackground(SELECTABLE_ITEM_BACKGROUND)
                     voteUp:setOnClick("voteUp")
                     Builder:endViewGroup()
     
                     local voteDown = Builder:beginFrameLayout("vote_down_button")
                     voteDown:setLayoutSize("40dp", "wrap_content")
                     voteDown:setLayoutWeight(1.0)
-                    voteDown:setBackground(ACTIONBAR_ITEM_BACKGROUND)
+                    voteDown:setBackground(SELECTABLE_ITEM_BACKGROUND)
                     voteDown:setOnClick("voteDown")
                     Builder:endViewGroup()
                 Builder:endViewGroup()
@@ -110,7 +110,7 @@ function newView(Builder)
             thread_info_layout:setLayoutWeight(1.000000)
             thread_info_layout:setOrientation("vertical")
             thread_info_layout:setMinHeight("70dp")
-            thread_info_layout:setBackground(ACTIONBAR_ITEM_BACKGROUND)
+            thread_info_layout:setBackground(SELECTABLE_ITEM_BACKGROUND)
             thread_info_layout:setPaddingLeft("5dip")
             thread_info_layout:setPaddingTop("2dip")
             thread_info_layout:setPaddingBottom("2dip")
@@ -203,7 +203,7 @@ function newView(Builder)
             frame:setBackground(THUMBNAIL_BGCOLOR)
             	local frame = Builder:beginFrameLayout("thumbnail_frame")
             	frame:setLayoutSize("wrap_content", "fill_parent")
-            	frame:setBackground(ACTIONBAR_ITEM_BACKGROUND)
+            	frame:setBackground(SELECTABLE_ITEM_BACKGROUND)
             	frame:setOnClick("clickThumbnail")
             	
 	                local image = Builder:addImageView("thumbnail_image")

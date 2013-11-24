@@ -15,7 +15,7 @@ local TEXT_SIZE_BODY = TEXT_SIZE_SMALL * 1.1
 -- http://colllor.com/33b5e5
 local CHECKED_BGCOLOR = "#DBF2FA"
 
-local ACTIONBAR_ITEM_BACKGROUND = redditisfun.ACTIONBAR_ITEM_BACKGROUND
+local SELECTABLE_ITEM_BACKGROUND = redditisfun.SELECTABLE_ITEM_BACKGROUND
 local Fonts = redditisfun.Fonts
 local Toasts = redditisfun.Toasts
 
@@ -25,7 +25,7 @@ function newView(Builder)
 	local view1 = Builder:beginLinearLayout("root_container")
 	view1:setLayoutSize("fill_parent", "wrap_content")
 	view1:setOrientation("horizontal")
-	view1:setBackground(ACTIONBAR_ITEM_BACKGROUND)
+	view1:setBackground(SELECTABLE_ITEM_BACKGROUND)
 		local function addIndent(viewId)
 			local left_indent = Builder:addView(viewId)
 			left_indent:setLayoutSize("1dp", "fill_parent")
