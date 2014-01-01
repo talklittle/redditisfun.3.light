@@ -2,9 +2,9 @@
     "id": "redditisfun.3.light.alpha",
     "name": "reddit is fun 3.0 light (ALPHA)",
     
-    "version": 12,
-    "app_version_code": 170,
-    "app_version_name": "3.1.0-alpha4",
+    "version": 13,
+    "app_version_code": 173,
+    "app_version_name": "3.1.0",
     "api_level": 8,
     
     "android_theme": "Reddit_Light",
