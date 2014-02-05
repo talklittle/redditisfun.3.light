@@ -55,7 +55,7 @@ function newView(Builder)
         local trophy_case_area = Builder:beginLinearLayout("trophy_case_area")
         trophy_case_area:setLayoutSize("match_parent", "wrap_content")
         trophy_case_area:setOrientation("vertical")
-        trophy_case_area:setBackground("#1f7f7f7f")
+        trophy_case_area:setBackground("#ffdfdfdf")
 
             local trophies_title = Builder:addTextView("trophies_title")
             trophies_title:setLayoutSize("wrap_content", "wrap_content")
