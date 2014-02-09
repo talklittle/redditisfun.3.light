@@ -1,8 +1,8 @@
 {
     "id": "redditisfun.3.light",
-    "name": "reddit is fun 3 light (BETA)",
+    "name": "reddit is fun 3 light",
     
-    "version": 13,
+    "version": 14,
     "app_version_code": 177,
     "app_version_name": "3.1.4",
     "api_level": 8,
