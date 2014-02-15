@@ -353,7 +353,8 @@ function bindView(Holder, Thing, ListItem)
     local votes = Holder:getView("votes")
     local upArrow = Holder:getView("vote_up_image")
     local downArrow = Holder:getView("vote_down_image")
-    votes:setText(tostring(Thing:getScore()));
+    local scoreInt = Thing:getScore()
+    votes:setText(tostring(scoreInt >= 0 and scoreInt or 0))
     if Thing:getLikes() == true then
     	local colorArrowRed = "#ffff8b60"
     	votes:setTextColor(colorArrowRed)
