@@ -242,54 +242,63 @@ end
 ---
 -- @usage exported
 function bindView(Holder, Thing, ListItem)
+    local isListItemChecked = ListItem:isChecked()
+    
 	local rootContainer = Holder:getView("root_container")
-	rootContainer:setBackground(ListItem:isChecked() and CHECKED_BGCOLOR or SELECTABLE_ITEM_BACKGROUND)
+	rootContainer:setBackground(isListItemChecked and CHECKED_BGCOLOR or SELECTABLE_ITEM_BACKGROUND)
 	
 	local voteUpButton = Holder:getView("vote_up_button")
 	local voteDownButton = Holder:getView("vote_down_button")
-	voteUpButton:setDrawable(Thing:getLikes()==true and "up_arrow_red.png" or "up_arrow_holo_light.png")
-	voteDownButton:setDrawable(Thing:getLikes()==false and "down_arrow_blue.png" or "down_arrow_holo_light.png")
+    local thingLikes = Thing:getLikes()
+	voteUpButton:setDrawable(thingLikes==true and "up_arrow_red.png" or "up_arrow_holo_light.png")
+	voteDownButton:setDrawable(thingLikes==false and "down_arrow_blue.png" or "down_arrow_holo_light.png")
 
 	local body = Holder:getView("body")
 
 	-- indentation
+    local thingNestingLevel = Thing:getNestingLevel()
 	for i = 1,8 do
-	    Holder:getView("left_indent" .. i):setVisible(Thing:getNestingLevel() >= i)
+	    Holder:getView("left_indent" .. i):setVisible(thingNestingLevel >= i)
 	end
 	
-	Holder:getView("comment_actions"):setVisible(ListItem:isChecked())
+	Holder:getView("comment_actions"):setVisible(isListItemChecked)
 	
 	--
 	-- comment info
 	--
-	if Thing:isDeleted() or Thing:getLikes() == nil then
+	if Thing:isDeleted() or thingLikes == nil then
 		Holder:getView("vote_up_comment_image"):setVisibility("gone")
 		Holder:getView("vote_down_comment_image"):setVisibility("gone")
-	elseif Thing:getLikes() == true then
+	elseif thingLikes == true then
 		Holder:getView("vote_up_comment_image"):setVisibility("visible")
 		Holder:getView("vote_down_comment_image"):setVisibility("gone")
-	else --if Thing:getLikes() == false then
+	else --if thingLikes == false then
 		Holder:getView("vote_up_comment_image"):setVisibility("gone")
 		Holder:getView("vote_down_comment_image"):setVisibility("visible")
 	end
 	
 	local submitter = Holder:getView("submitter")
 	submitter:setText(Thing:getAuthor())
-	if Thing:isOp() then
+
+    local isThingOp = Thing:isOp()
+    local isThingModerator = Thing:isModerator()
+    local isThingAdmin = Thing:isAdmin()
+    local isThingSpecialAdmin = Thing:isSpecialAdmin()
+	if isThingOp then
 		submitter:setTextColor(TEXT_COLOR_OP)
-	elseif Thing:isModerator() then
+	elseif isThingModerator then
 		submitter:setTextColor(TEXT_COLOR_MODERATOR)
-	elseif Thing:isAdmin() then
+	elseif isThingAdmin then
 		submitter:setTextColor(TEXT_COLOR_ADMIN)
-	elseif Thing:isSpecialAdmin() then
+	elseif isThingSpecialAdmin then
 		submitter:setTextColor(TEXT_COLOR_SPECIAL_ADMIN)
 	else
 		submitter:setTextColor(TEXT_COLOR_SUBMITTER)
 	end
-	Holder:getView("submitter_distinguished_op"):setVisible(Thing:isOp())
-	Holder:getView("submitter_distinguished_mod"):setVisible(Thing:isModerator())
-	Holder:getView("submitter_distinguished_admin"):setVisible(Thing:isAdmin())
-	Holder:getView("submitter_distinguished_special"):setVisible(Thing:isSpecialAdmin())
+	Holder:getView("submitter_distinguished_op"):setVisible(isThingOp)
+	Holder:getView("submitter_distinguished_mod"):setVisible(isThingModerator)
+	Holder:getView("submitter_distinguished_admin"):setVisible(isThingAdmin)
+	Holder:getView("submitter_distinguished_special"):setVisible(isThingSpecialAdmin)
 	
 		
 	local score = Thing:getUps() - Thing:getDowns()
@@ -321,10 +330,11 @@ function bindView(Holder, Thing, ListItem)
 		flairView:setVisible(false)
 	end
 
-	if Thing:getRenderedBody() then
+    local thingRenderedBody = Thing:getRenderedBody()
+	if thingRenderedBody then
 		-- TODO catch ArrayIndexOutOfBoundsException
 		-- JellyBean bug http://code.google.com/p/android/issues/detail?id=34872
-		body:setText(Thing:getRenderedBody())
+		body:setText(thingRenderedBody)
 	else
 		body:setText(Thing:getBody())
 	end

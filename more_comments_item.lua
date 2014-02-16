@@ -69,8 +69,9 @@ end
 -- @usage exported
 function bindView(Holder, Thing, ListItem)
 	-- indentation
+    local thingNestingLevel = Thing:getNestingLevel()
 	for i = 1,8 do
-	    Holder:getView("left_indent" .. i):setVisible(Thing:getNestingLevel() >= i)
+	    Holder:getView("left_indent" .. i):setVisible(thingNestingLevel >= i)
 	end
 	
 	Holder:getView("more_comments_progress"):setVisible(Thing:isLoading())

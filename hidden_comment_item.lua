@@ -148,8 +148,9 @@ end
 -- @usage exported
 function bindView(Holder, Thing, ListItem)
 	-- indentation
+    local thingNestingLevel = Thing:getNestingLevel()
 	for i = 1,8 do
-	    Holder:getView("left_indent" .. i):setVisible(Thing:getNestingLevel() >= i)
+	    Holder:getView("left_indent" .. i):setVisible(thingNestingLevel >= i)
 	end
 	
 	--
@@ -157,21 +158,26 @@ function bindView(Holder, Thing, ListItem)
 	--
 	local submitter = Holder:getView("submitter")
 	submitter:setText(Thing:getAuthor())
-	if Thing:isOp() then
+
+    local isThingOp = Thing:isOp()
+    local isThingModerator = Thing:isModerator()
+    local isThingAdmin = Thing:isAdmin()
+    local isThingSpecialAdmin = Thing:isSpecialAdmin()
+	if isThingOp then
 		submitter:setTextColor(TEXT_COLOR_OP)
-	elseif Thing:isModerator() then
+	elseif isThingModerator then
 		submitter:setTextColor(TEXT_COLOR_MODERATOR)
-	elseif Thing:isAdmin() then
+	elseif isThingAdmin then
 		submitter:setTextColor(TEXT_COLOR_ADMIN)
-	elseif Thing:isSpecialAdmin() then
+	elseif isThingSpecialAdmin then
 		submitter:setTextColor(TEXT_COLOR_SPECIAL_ADMIN)
 	else
 		submitter:setTextColor(TEXT_COLOR_SUBMITTER)
 	end
-	Holder:getView("submitter_distinguished_op"):setVisible(Thing:isOp())
-	Holder:getView("submitter_distinguished_mod"):setVisible(Thing:isModerator())
-	Holder:getView("submitter_distinguished_admin"):setVisible(Thing:isAdmin())
-	Holder:getView("submitter_distinguished_special"):setVisible(Thing:isSpecialAdmin())
+	Holder:getView("submitter_distinguished_op"):setVisible(isThingOp)
+	Holder:getView("submitter_distinguished_mod"):setVisible(isThingModerator)
+	Holder:getView("submitter_distinguished_admin"):setVisible(isThingAdmin)
+	Holder:getView("submitter_distinguished_special"):setVisible(isThingSpecialAdmin)
 		
 	local score = Thing:getUps() - Thing:getDowns()
     if Thing:isScore_hidden() then
