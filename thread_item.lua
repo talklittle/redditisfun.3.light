@@ -349,7 +349,6 @@ end
 ---
 -- @usage exported
 function bindView(Holder, Thing, ListItem)
-    local thumbnail_frame = Holder:getView("thumbnail_frame")
 
     bindTitleAndDomain(Holder:getView("title"), Thing)
     
@@ -449,8 +448,9 @@ function bindView(Holder, Thing, ListItem)
 	end
 	
 	local thread_actions = Holder:getView("thread_actions")
-	
-	thumbnail_frame:setOnClick(function(v)
+
+    local thumbnail_frame = Holder:getView("thumbnail_frame")
+    thumbnail_frame:setOnClick(function(v)
 		-- hide the actions, then delegate to reddit-is-fun built-in method "clickThumbnail"
 		if shared_state.show_thread_actions then
 			thread_actions:collapseVertical(EXPAND_ANIMATION_DURATION_MILLIS)
