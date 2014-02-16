@@ -343,19 +343,20 @@ function bindView(Holder, Thing, ListItem)
     local votes = Holder:getView("votes")
     local upArrow = Holder:getView("vote_up_image")
     local downArrow = Holder:getView("vote_down_image")
-    local scoreInt = Thing:getScore()
-    votes:setText(tostring(scoreInt >= 0 and scoreInt or 0))
-    if Thing:getLikes() == true then
+    local thingScore = Thing:getScore()
+    local thingLikes = Thing:getLikes()
+    votes:setText(tostring(thingScore >= 0 and thingScore or 0))
+    if thingLikes == true then
     	local colorArrowRed = "#ffff8b60"
     	votes:setTextColor(colorArrowRed)
     	upArrow:setDrawable(DRAWABLE_VOTE_UP_RED)
     	downArrow:setDrawable(DRAWABLE_VOTE_DOWN_GRAY)
-	elseif Thing:getLikes() == false then
+	elseif thingLikes == false then
 		local colorArrowBlue = "#ff9494ff"
 		votes:setTextColor(colorArrowBlue)
 		upArrow:setDrawable(DRAWABLE_VOTE_UP_GRAY)
 		downArrow:setDrawable(DRAWABLE_VOTE_DOWN_BLUE)
-	else -- Thing:getLikes() == nil
+	else -- thingLikes == nil
 		local colorArrowGray = "#ffc0c0c0"
 		votes:setTextColor(colorArrowGray)
 	    upArrow:setDrawable(DRAWABLE_VOTE_UP_GRAY)
@@ -363,14 +364,16 @@ function bindView(Holder, Thing, ListItem)
 	end
 	
 	local num_reports = Holder:getView("num_reports")
-	local hasReports = Thing:getNum_reports() ~= nil and Thing:getNum_reports() > 0
+    local thingNumReports = Thing:getNum_reports()
+	local hasReports = thingNumReports ~= nil and thingNumReports > 0
 	num_reports:setVisible(hasReports)
 	if hasReports then
-		num_reports:setText(string.format(Thing:getNum_reports()==1 and "%d report" or "%d reports", Thing:getNum_reports()))
+		num_reports:setText(string.format(thingNumReports==1 and "%d report" or "%d reports", thingNumReports))
 	end
-	
+
+    local thingNumComments = Thing:getNum_comments()
 	Holder:getView("nsfw"):setVisible(Thing:isOver_18())
-	Holder:getView("num_comments"):setText(string.format(Thing:getNum_comments()==1 and "%d comment" or "%d comments", Thing:getNum_comments()))
+	Holder:getView("num_comments"):setText(string.format(thingNumComments==1 and "%d comment" or "%d comments", thingNumComments))
 	Holder:getView("subreddit"):setText(Thing:getSubreddit())
 	Holder:getView("submission_time"):setText(Thing:getCreatedTimeAgo())
 	Holder:getView("submitter"):setText("by "..Thing:getAuthor())
@@ -384,12 +387,13 @@ function bindView(Holder, Thing, ListItem)
 	local thumbnail_icon = Holder:getView("thumbnail_icon")
 	local thumbnail_icon_label = Holder:getView("thumbnail_icon_label")
 	local thumbnail_progress = Holder:getView("thumbnail_progress")
-	local defaultThumbnail = getDefaultThumbnail(Thing:getThumbnail())
+    local thingThumbnail = Thing:getThumbnail()
+	local defaultThumbnail = getDefaultThumbnail(thingThumbnail)
 	if defaultThumbnail then
 		thumbnail:setVisibility("visible")
 		thumbnail_icon_frame:setVisibility("gone")
 		thumbnail:setDrawable(defaultThumbnail)
-	elseif Thing:getThumbnail() == "" then
+	elseif thingThumbnail == "" then
 		if Thing:isIs_self() then
 			thumbnail:setVisibility("visible")
 			thumbnail_icon_frame:setVisibility("gone")
@@ -422,11 +426,11 @@ function bindView(Holder, Thing, ListItem)
 	else
 		thumbnail_icon_frame:setVisibility("gone")
 		-- displayImageWithProgress will handle visibility of thumbnail and thumbnail_progress
-		if pcall(thumbnail.displayThumbnailImageWithProgress, thumbnail, Thing:getThumbnail(), thumbnail_progress) then
+		if pcall(thumbnail.displayThumbnailImageWithProgress, thumbnail, thingThumbnail, thumbnail_progress) then
 			-- success, no-op, app version 3.0.8
-			--thumbnail:displayThumbnailImageWithProgress(Thing:getThumbnail(), thumbnail_progress)
+			--thumbnail:displayThumbnailImageWithProgress(thingThumbnail, thumbnail_progress)
 		else
-			thumbnail:displayImageWithProgress(Thing:getThumbnail(), thumbnail_progress)
+			thumbnail:displayImageWithProgress(thingThumbnail, thumbnail_progress)
 		end
 	end
 	

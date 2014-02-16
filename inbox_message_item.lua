@@ -201,8 +201,9 @@ local function bindViewCommon(Holder, Thing, ListItem)
 	rootContainer:setBackground(ListItem:isChecked() and CHECKED_BGCOLOR or SELECTABLE_ITEM_BACKGROUND)
 	
 	-- indentation
+    local thingNestingLevel = Thing:getNestingLevel()
 	for i = 1,8 do
-	    Holder:getView("left_indent" .. i):setVisible(Thing:getNestingLevel() >= i)
+	    Holder:getView("left_indent" .. i):setVisible(thingNestingLevel >= i)
 	end
     
     Holder:getView("message_actions"):setVisible(ListItem:isChecked())
@@ -243,10 +244,11 @@ local function bindViewCommon(Holder, Thing, ListItem)
 	sentTimeView:setText(Thing:getCreatedTimeAgo())
 	
 	local bodyView = Holder:getView("body")
-	if Thing:getRenderedBody() then
+    local thingRenderedBody = Thing:getRenderedBody()
+	if thingRenderedBody then
 		-- TODO catch ArrayIndexOutOfBoundsException
 		-- JellyBean bug http://code.google.com/p/android/issues/detail?id=34872
-		bodyView:setText(Thing:getRenderedBody())
+		bodyView:setText(thingRenderedBody)
 	else
 		bodyView:setText(Thing:getBody())
 	end
@@ -266,8 +268,9 @@ end
 -- @usage exported
 function bindViewMessage(Holder, Thing, ListItem)
 	-- indentation
+    local thingNestingLevel = Thing:getNestingLevel()
 	for i = 1,8 do
-	    Holder:getView("left_indent" .. i):setVisible(Thing:getNestingLevel() >= i)
+	    Holder:getView("left_indent" .. i):setVisible(thingNestingLevel >= i)
 	end
     
     Holder:getView("message_actions"):setVisible(ListItem:isChecked())
@@ -301,7 +304,8 @@ function bindViewComment(Holder, Thing, ListItem)
     -- comments may have context
     local context = Holder:getView("context")
     context:setVisible(true)
-    context:setEnabled(Thing:getContext() and Thing:getContext() ~= "")
+    local thingContext = Thing:getContext()
+    context:setEnabled(thingContext and thingContext ~= "")
     
     local voteUpButton = Holder:getView("vote_up_button")
     local voteDownButton = Holder:getView("vote_down_button")
@@ -316,8 +320,9 @@ function bindViewComment(Holder, Thing, ListItem)
     reply:setEnabled(canAct)
     
     -- comments have vote
-	voteUpButton:setDrawable(Thing:getLikes()==true and "up_arrow_red.png" or "up_arrow_holo_light.png")
-	voteDownButton:setDrawable(Thing:getLikes()==false and "down_arrow_blue.png" or "down_arrow_holo_light.png")
+    local thingLikes = Thing:getLikes()
+	voteUpButton:setDrawable(thingLikes==true and "up_arrow_red.png" or "up_arrow_holo_light.png")
+	voteDownButton:setDrawable(thingLikes==false and "down_arrow_blue.png" or "down_arrow_holo_light.png")
 	
 	-- comments cannot be collapsed (only mod mail)
 	Holder:getView("collapse"):setVisible(false)

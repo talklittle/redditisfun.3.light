@@ -260,10 +260,11 @@ local function bindTitleAndDomain(textView, Thing)
 	local domainSize = TEXT_SIZE_SMALL
 	
 	-- link flair
-	local hasFlair = Thing:getLink_flair_text() and "" ~= Thing:getLink_flair_text()
+    local thingLinkFlairText = Thing:getLink_flair_text()
+	local hasFlair = thingLinkFlairText and "" ~= thingLinkFlairText
 	local flairBuilder
 	if hasFlair then
-		flairBuilder = Spans:addSize(Thing:getLink_flair_text(), flairSize)
+		flairBuilder = Spans:addSize(thingLinkFlairText, flairSize)
 		flairBuilder = Spans:addBackgroundColor(flairBuilder, flairBackgroundColor)
 	else
 		flairBuilder = Spans:builder()  -- empty SpannableStringBuilder
@@ -318,19 +319,20 @@ function bindView(Holder, Thing, ListItem)
     local votes = Holder:getView("votes")
     local upArrow = Holder:getView("vote_up_image")
     local downArrow = Holder:getView("vote_down_image")
-    local scoreInt = Thing:getScore()
-    votes:setText(tostring(scoreInt >= 0 and scoreInt or 0))
-    if Thing:getLikes() == true then
+    local thingScore = Thing:getScore()
+    local thingLikes = Thing:getLikes()
+    votes:setText(tostring(thingScore >= 0 and thingScore or 0))
+    if thingLikes == true then
     	local colorArrowRed = "#ffff8b60"
     	votes:setTextColor(colorArrowRed)
     	upArrow:setDrawable(DRAWABLE_VOTE_UP_RED)
     	downArrow:setDrawable(DRAWABLE_VOTE_DOWN_GRAY)
-	elseif Thing:getLikes() == false then
+	elseif thingLikes == false then
 		local colorArrowBlue = "#ff9494ff"
 		votes:setTextColor(colorArrowBlue)
 		upArrow:setDrawable(DRAWABLE_VOTE_UP_GRAY)
 		downArrow:setDrawable(DRAWABLE_VOTE_DOWN_BLUE)
-	else -- Thing:getLikes() == nil
+	else -- thingLikes == nil
 		local colorArrowGray = "#ffc0c0c0"
 		votes:setTextColor(colorArrowGray)
 	    upArrow:setDrawable(DRAWABLE_VOTE_UP_GRAY)
