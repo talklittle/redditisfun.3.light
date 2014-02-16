@@ -284,7 +284,7 @@ function bindViewMessage(Holder, Thing, ListItem)
 	-- collapse: only mod mail with replies
     local subreddit = Thing:getSubreddit()
 	local collapseView = Holder:getView("collapse")
-	collapseView:setVisible(Thing:getReplies() ~= nil and subreddit ~= nil and subreddit ~= "");
+	collapseView:setVisible(Thing:getReplies() ~= nil and subreddit ~= nil and subreddit ~= "")
 	
 	Holder:getView("permalink"):setVisible(true)
     
