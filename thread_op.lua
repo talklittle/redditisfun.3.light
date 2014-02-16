@@ -311,14 +311,7 @@ end
 ---
 -- @usage exported
 function bindView(Holder, Thing, ListItem)
-    -- set click data for clickable elements that delegate to Java
-    Holder:getView("vote_up_button"):setClickData(Thing)
-    Holder:getView("vote_down_button"):setClickData(Thing)
-    Holder:getView("thread_info_layout"):setClickData(Thing)
-    Holder:getView("thumbnail_frame"):setClickData(Thing)
-	local selftext = Holder:getView("selftext")
-    selftext:setClickData(Thing)
-    
+
     bindTitleAndDomain(Holder:getView("title"), Thing)
     
     -- votes
@@ -413,7 +406,8 @@ function bindView(Holder, Thing, ListItem)
 	end
 	
 	-- selftext
-	if Thing:getRenderedSelftext() then
+    local selftext = Holder:getView("selftext")
+    if Thing:getRenderedSelftext() then
 		-- TODO catch ArrayIndexOutOfBoundsException
 		-- JellyBean bug http://code.google.com/p/android/issues/detail?id=34872
 		selftext:setText(Thing:getRenderedSelftext())

@@ -349,18 +349,8 @@ end
 ---
 -- @usage exported
 function bindView(Holder, Thing, ListItem)
-    -- set click data for clickable elements that delegate to Java
-    Holder:getView("vote_up_button"):setClickData(Thing)
-    Holder:getView("vote_down_button"):setClickData(Thing)
-    Holder:getView("thread_info_layout"):setClickData(Thing)
     local thumbnail_frame = Holder:getView("thumbnail_frame")
-    thumbnail_frame:setClickData(Thing)
-    Holder:getView("share"):setClickData(Thing)
-    Holder:getView("save"):setClickData(Thing)
-    Holder:getView("hide"):setClickData(Thing)
-    Holder:getView("more_actions"):setClickData(Thing)
-    Holder:getView("comments"):setClickData(Thing)
-    
+
     bindTitleAndDomain(Holder:getView("title"), Thing)
     
     -- votes

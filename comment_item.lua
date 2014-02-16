@@ -293,21 +293,6 @@ function bindView(Holder, Thing, ListItem)
 	local parent = Holder:getView("parent")
 	local body = Holder:getView("body")
 
-	-- set click data for clickable elements that delegate to Java
-	rootContainer:setClickData(Thing)
-	body:setClickData(Thing)
-	Holder:getView("hide_comment"):setClickData(Thing)
-	next:setClickData(Thing)
-	prev:setClickData(Thing)
-	parent:setClickData(Thing)
-	Holder:getView("root"):setClickData(Thing)
-	Holder:getView("full_comments"):setClickData(Thing)
-	Holder:getView("reply"):setClickData(Thing)
-	Holder:getView("more_actions"):setClickData(Thing)
-	Holder:getView("permalink"):setClickData(Thing)
-	voteUpButton:setClickData(Thing)
-	voteDownButton:setClickData(Thing)
-	
 	-- indentation
 	for i = 1,8 do
 	    Holder:getView("left_indent" .. i):setVisible(Thing:getNestingLevel() >= i)

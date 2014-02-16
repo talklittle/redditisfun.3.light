@@ -265,15 +265,6 @@ end
 ---
 -- @usage exported
 function bindViewMessage(Holder, Thing, ListItem)
-    -- set click data for clickable elements that delegate to Java
-    Holder:getView("content"):setClickData(Thing)
-    Holder:getView("collapse"):setClickData(Thing)
-    Holder:getView("body"):setClickData(Thing)
-    Holder:getView("permalink"):setClickData(Thing)
-    Holder:getView("more_actions"):setClickData(Thing)
-    Holder:getView("mark_unread"):setClickData(Thing)
-    Holder:getView("reply"):setClickData(Thing)
-    
 	-- indentation
 	for i = 1,8 do
 	    Holder:getView("left_indent" .. i):setVisible(Thing:getNestingLevel() >= i)
@@ -303,19 +294,12 @@ end
 ---
 -- @usage exported
 function bindViewComment(Holder, Thing, ListItem)
-    -- set click data for clickable elements that delegate to Java
-    Holder:getView("content"):setClickData(Thing)
-    Holder:getView("body"):setClickData(Thing)
-    Holder:getView("permalink"):setClickData(Thing)
-    Holder:getView("mark_unread"):setClickData(Thing)
-    
     --
     -- inbox comment info
     --
     
     -- comments may have context
     local context = Holder:getView("context")
-    context:setClickData(Thing)
     context:setVisible(true)
     context:setEnabled(Thing:getContext() and Thing:getContext() ~= "")
     
@@ -323,11 +307,7 @@ function bindViewComment(Holder, Thing, ListItem)
     local voteDownButton = Holder:getView("vote_down_button")
     local moreActions = Holder:getView("more_actions")
     local reply = Holder:getView("reply")
-    voteUpButton:setClickData(Thing)
-    voteDownButton:setClickData(Thing)
-    moreActions:setClickData(Thing)
-    reply:setClickData(Thing)
-    
+
     -- comments cannot be acted on if deleted
     local canAct = not Thing:isDeleted()
     voteUpButton:setEnabled(canAct)
