@@ -361,12 +361,13 @@ function bindView(Holder, Thing, ListItem)
 	local thumbnail_icon = Holder:getView("thumbnail_icon")
 	local thumbnail_icon_label = Holder:getView("thumbnail_icon_label")
 	local thumbnail_progress = Holder:getView("thumbnail_progress")
-	local defaultThumbnail = getDefaultThumbnail(Thing:getThumbnail())
+    local thingThumbnail = Thing:getThumbnail()
+	local defaultThumbnail = getDefaultThumbnail(thingThumbnail)
 	if defaultThumbnail then
 		thumbnail:setVisibility("visible")
 		thumbnail_icon_frame:setVisibility("gone")
 		thumbnail:setDrawable(defaultThumbnail)
-	elseif Thing:getThumbnail() == "" then
+	elseif thingThumbnail == "" then
 		if Thing:isIs_self() then
 			thumbnail:setVisibility("visible")
 			thumbnail_icon_frame:setVisibility("gone")
@@ -398,14 +399,9 @@ function bindView(Holder, Thing, ListItem)
 		end
 	else
 		thumbnail_icon_frame:setVisibility("gone")
-		-- displayImageWithProgress will handle visibility of thumbnail and thumbnail_progress
-		if pcall(thumbnail.displayThumbnailImageWithProgress, thumbnail, Thing:getThumbnail(), thumbnail_progress) then
-			-- success, no-op, app version 3.0.8
-			--thumbnail:displayThumbnailImageWithProgress(Thing:getThumbnail(), thumbnail_progress)
-		else
-			thumbnail:displayImageWithProgress(Thing:getThumbnail(), thumbnail_progress)
-		end
-	end
+        -- displayThumbnailImageWithProgress will handle visibility of thumbnail and thumbnail_progress
+        thumbnail:displayThumbnailImageWithProgress(thingThumbnail, thumbnail_progress)
+    end
 	
 	-- selftext
     local selftext = Holder:getView("selftext")

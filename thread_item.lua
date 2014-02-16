@@ -414,10 +414,7 @@ function bindView(Holder, Thing, ListItem)
 			thumbnail:setDrawable(DRAWABLE_THUMBNAIL_SELF)
 		else	
 			thumbnail:setVisibility("gone")
-			if pcall(thumbnail.cancelDisplayImage, thumbnail) then
-				-- success, no-op, app version 3.0.8
-				--thumbnail:cancelDisplayImage()
-			end
+            thumbnail:cancelDisplayImage()
 			thumbnail_icon_frame:setVisibility("visible")
 			local urlLower = Thing:getUrl():lower()
 			local imageLabelText = getImageLabelText(urlLower)
@@ -443,14 +440,9 @@ function bindView(Holder, Thing, ListItem)
 		end
 	else
 		thumbnail_icon_frame:setVisibility("gone")
-		-- displayImageWithProgress will handle visibility of thumbnail and thumbnail_progress
-		if pcall(thumbnail.displayThumbnailImageWithProgress, thumbnail, thingThumbnail, thumbnail_progress) then
-			-- success, no-op, app version 3.0.8
-			--thumbnail:displayThumbnailImageWithProgress(thingThumbnail, thumbnail_progress)
-		else
-			thumbnail:displayImageWithProgress(thingThumbnail, thumbnail_progress)
-		end
-	end
+        -- displayThumbnailImageWithProgress will handle visibility of thumbnail and thumbnail_progress
+        thumbnail:displayThumbnailImageWithProgress(thingThumbnail, thumbnail_progress)
+    end
 	
 	local thread_actions = Holder:getView("thread_actions")
 
