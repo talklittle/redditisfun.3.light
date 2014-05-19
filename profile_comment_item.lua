@@ -168,6 +168,7 @@ function newView(Builder)
 	        body:setTextSize(TEXT_SIZE_BODY)
 	        body:setTextColor("#000000")
 	        body:setLinksClickable(true)
+            body:setHasContextMenu(true)
 	
 	        local comment_actions = Builder:beginLinearLayout("comment_actions")
 	        comment_actions:setLayoutSize("fill_parent", "wrap_content")
@@ -339,6 +340,4 @@ function bindView(Holder, Thing, ListItem)
 		body:setText(Thing:getBody())
 	end
 	body:setMovementMethod("LinkMovementMethod")
-	body:setClickable(true)
-	body:setLongClickable(false)
 end

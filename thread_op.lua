@@ -240,6 +240,7 @@ function newView(Builder)
         selftext:setOnClick("onListItemClick")
         selftext:setClickable(true)
         selftext:setLinksClickable(true)
+        selftext:setHasContextMenu(true)
     
     Builder:endViewGroup()
     
