@@ -194,6 +194,15 @@ function newView(Builder)
                     submitter_distinguished_special:setTextSize(TEXT_SIZE_SMALL)
                     submitter_distinguished_special:setTextColor("#BE1337")
                     submitter_distinguished_special:setSingleLine(true)
+
+                    local user_flair = Builder:addTextView("user_flair")
+                    user_flair:setLayoutSize("wrap_content", "wrap_content")
+                    user_flair:setVisibility("gone")
+                    user_flair:setTextSize(TEXT_SIZE_SMALL)
+                    user_flair:setTextColor(TEXT_COLOR_SECONDARY)
+                    user_flair:setBackground("#dfdfdf")
+                    user_flair:setEllipsize("end")
+                    user_flair:setSingleLine(true)
                 Builder:endViewGroup()
     
             Builder:endViewGroup()
@@ -403,8 +412,28 @@ function bindView(Holder, Thing, ListItem)
         -- displayThumbnailImageWithProgress will handle visibility of thumbnail and thumbnail_progress
         thumbnail:displayThumbnailImageWithProgress(thingThumbnail, thumbnail_progress)
     end
-	
-	-- selftext
+
+    -- flair
+    local userFlairView = Holder:getView("user_flair")
+    local userFlair
+    local userFlairText = Thing:getAuthor_flair_text()
+    local userFlairCssClass = Thing:getAuthor_flair_css_class()
+    if userFlairText ~= nil and "" ~= userFlairText then
+        userFlair = userFlairText
+    elseif (userFlairCssClass ~= nil and "" ~= userFlairCssClass) then
+        userFlair = userFlairCssClass
+    else
+        userFlair = nil
+    end
+
+    if userFlair ~= nil then
+        userFlairView:setVisible(true)
+        userFlairView:setText(userFlair)
+    else
+        userFlairView:setVisible(false)
+    end
+
+    -- selftext
     local selftext = Holder:getView("selftext")
     if Thing:getRenderedSelftext() then
 		-- TODO catch ArrayIndexOutOfBoundsException
