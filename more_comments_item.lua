@@ -32,6 +32,8 @@ function newView(Builder)
 		addIndent("left_indent6")
 		addIndent("left_indent7")
 		addIndent("left_indent8")
+		addIndent("left_indent9")
+		addIndent("left_indent10")
 
 	    local view2 = Builder:beginLinearLayout("view2")
 	    view2:setLayoutSize("match_parent", "wrap_content")
@@ -70,7 +72,7 @@ end
 function bindView(Holder, Thing, ListItem)
 	-- indentation
     local thingNestingLevel = Thing:getNestingLevel()
-	for i = 1,8 do
+	for i = 1,10 do
 	    Holder:getView("left_indent" .. i):setVisible(thingNestingLevel >= i)
 	end
 	
