@@ -43,7 +43,12 @@
             "new_view": "newView",
             "bind_view": "bindView"
         },
-        
+        "comments_deep": {
+            "file": "deep_comments_item.lua",
+            "new_view": "newView",
+            "bind_view": "bindView"
+        },
+
         "profile_thread": {
             "file": "profile_thread_item.lua",
             "new_view": "newView",
