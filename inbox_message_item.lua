@@ -22,24 +22,24 @@ function newView(Builder)
     local view1 = Builder:beginLinearLayout("view1")
     view1:setLayoutSize("fill_parent", "wrap_content")
     view1:setOrientation("horizontal")
-		local function addIndent(viewId)
-			local left_indent = Builder:addView(viewId)
-			left_indent:setLayoutSize("1dp", "fill_parent")
-			left_indent:setLayoutMarginLeft("5dp")
-			left_indent:setLayoutMarginRight("4dp")
-			left_indent:setBackground("#ffdfdfdf")
-		end
-		
-		addIndent("left_indent1")
-		addIndent("left_indent2")
-		addIndent("left_indent3")
-		addIndent("left_indent4")
-		addIndent("left_indent5")
-		addIndent("left_indent6")
-		addIndent("left_indent7")
-		addIndent("left_indent8")
-		addIndent("left_indent9")
-		addIndent("left_indent10")
+        local function addIndent(viewId)
+            local left_indent = Builder:addView(viewId)
+            left_indent:setLayoutSize("1dp", "fill_parent")
+            left_indent:setLayoutMarginLeft("5dp")
+            left_indent:setLayoutMarginRight("4dp")
+            left_indent:setBackground("#ffdfdfdf")
+        end
+        
+        addIndent("left_indent1")
+        addIndent("left_indent2")
+        addIndent("left_indent3")
+        addIndent("left_indent4")
+        addIndent("left_indent5")
+        addIndent("left_indent6")
+        addIndent("left_indent7")
+        addIndent("left_indent8")
+        addIndent("left_indent9")
+        addIndent("left_indent10")
 
         local view2 = Builder:beginLinearLayout("view2")
         view2:setLayoutSize("fill_parent", "wrap_content")
@@ -106,10 +106,10 @@ function newView(Builder)
                     body:setLayoutSize("fill_parent", "wrap_content")
                     body:setBackground(SELECTABLE_ITEM_BACKGROUND)
                     body:setOnClick("onListItemClick")
-					body:setClickable(true)
-					body:setTextSize(TEXT_SIZE_BODY)
-					body:setTextColor("#000000")
-					body:setLinksClickable(true)
+                    body:setClickable(true)
+                    body:setTextSize(TEXT_SIZE_BODY)
+                    body:setTextColor("#000000")
+                    body:setLinksClickable(true)
                     body:setHasContextMenu(true)
                 Builder:endLinearLayout()
                 
@@ -200,79 +200,79 @@ function newView(Builder)
 end
 
 local function bindViewCommon(Holder, Thing, ListItem)
-	local rootContainer = Holder:getView("view1")
-	rootContainer:setBackground(ListItem:isChecked() and CHECKED_BGCOLOR or SELECTABLE_ITEM_BACKGROUND)
-	
-	-- indentation
+    local rootContainer = Holder:getView("view1")
+    rootContainer:setBackground(ListItem:isChecked() and CHECKED_BGCOLOR or SELECTABLE_ITEM_BACKGROUND)
+    
+    -- indentation
     local thingNestingLevel = Thing:getNestingLevel()
-	for i = 1,10 do
-	    Holder:getView("left_indent" .. i):setVisible(thingNestingLevel >= i)
-	end
+    for i = 1,10 do
+        Holder:getView("left_indent" .. i):setVisible(thingNestingLevel >= i)
+    end
     
     Holder:getView("message_actions"):setVisible(ListItem:isChecked())
 
     local subjectView = Holder:getView("subject")
     local subject = Thing:getSubject()
     if subject and subject ~= "" then
-    	subjectView:setVisible(true)
-    	subjectView:setText(subject)
-	else
-		subjectView:setVisible(false)
-	end
-	
-	local fromUserView = Holder:getView("from_user")
-	local author = Thing:getAuthor()
-	local dest = Thing:getDest()
-	if author and author ~= "" and dest and dest ~= "" then
-		fromUserView:setVisible(true)
-		if Thing:isCurrentUserAuthor() then
-			fromUserView:setText("to " .. dest)
-		else
-			fromUserView:setText("from " .. author)
-		end
-	else
-		fromUserView:setVisible(false)
-	end
+        subjectView:setVisible(true)
+        subjectView:setText(subject)
+    else
+        subjectView:setVisible(false)
+    end
+    
+    local fromUserView = Holder:getView("from_user")
+    local author = Thing:getAuthor()
+    local dest = Thing:getDest()
+    if author and author ~= "" and dest and dest ~= "" then
+        fromUserView:setVisible(true)
+        if Thing:isCurrentUserAuthor() then
+            fromUserView:setText("to " .. dest)
+        else
+            fromUserView:setText("from " .. author)
+        end
+    else
+        fromUserView:setVisible(false)
+    end
     
     local viaSubredditView = Holder:getView("via_subreddit")
     local subreddit = Thing:getSubreddit()
     if subreddit and subreddit ~= "" then
-    	viaSubredditView:setVisible(true)
-    	viaSubredditView:setText("/r/" .. subreddit)
-	else
-		viaSubredditView:setVisible(false)
-	end
-	
-	local sentTimeView = Holder:getView("sent_time")
-	sentTimeView:setText(Thing:getCreatedTimeAgo())
-	
-	local bodyView = Holder:getView("body")
+        viaSubredditView:setVisible(true)
+        viaSubredditView:setText("/r/" .. subreddit)
+    else
+        viaSubredditView:setVisible(false)
+    end
+    
+    local sentTimeView = Holder:getView("sent_time")
+    sentTimeView:setText(Thing:getCreatedTimeAgo())
+    
+    local bodyView = Holder:getView("body")
     local thingRenderedBody = Thing:getRenderedBody()
-	if thingRenderedBody then
-		-- TODO catch ArrayIndexOutOfBoundsException
-		-- JellyBean bug http://code.google.com/p/android/issues/detail?id=34872
-		bodyView:setText(thingRenderedBody)
-	else
-		bodyView:setText(Thing:getBody())
-	end
-	bodyView:setMovementMethod("LinkMovementMethod")
+    if thingRenderedBody then
+        -- TODO catch ArrayIndexOutOfBoundsException
+        -- JellyBean bug http://code.google.com/p/android/issues/detail?id=34872
+        bodyView:setText(thingRenderedBody)
+    else
+        bodyView:setText(Thing:getBody())
+    end
+    bodyView:setMovementMethod("LinkMovementMethod")
 
-	local topLineTextColor = Thing:isNew() and TEXT_COLOR_NEW or TEXT_COLOR_OLD
-	fromUserView:setTextColor(topLineTextColor)
-	viaSubredditView:setTextColor(topLineTextColor)
-	sentTimeView:setTextColor(topLineTextColor)
-	
-	Holder:getView("mark_unread"):setVisible(not Thing:isNew() and not Thing:isCurrentUserAuthor())
+    local topLineTextColor = Thing:isNew() and TEXT_COLOR_NEW or TEXT_COLOR_OLD
+    fromUserView:setTextColor(topLineTextColor)
+    viaSubredditView:setTextColor(topLineTextColor)
+    sentTimeView:setTextColor(topLineTextColor)
+    
+    Holder:getView("mark_unread"):setVisible(not Thing:isNew() and not Thing:isCurrentUserAuthor())
 end
 
 ---
 -- @usage exported
 function bindViewMessage(Holder, Thing, ListItem)
-	-- indentation
+    -- indentation
     local thingNestingLevel = Thing:getNestingLevel()
-	for i = 1,10 do
-	    Holder:getView("left_indent" .. i):setVisible(thingNestingLevel >= i)
-	end
+    for i = 1,10 do
+        Holder:getView("left_indent" .. i):setVisible(thingNestingLevel >= i)
+    end
     
     Holder:getView("message_actions"):setVisible(ListItem:isChecked())
     
@@ -285,12 +285,12 @@ function bindViewMessage(Holder, Thing, ListItem)
     Holder:getView("vote_up_button"):setVisible(false)
     Holder:getView("vote_down_button"):setVisible(false)
     
-	-- collapse: only mod mail with replies
+    -- collapse: only mod mail with replies
     local subreddit = Thing:getSubreddit()
-	local collapseView = Holder:getView("collapse")
-	collapseView:setVisible(Thing:getReplies() ~= nil and subreddit ~= nil and subreddit ~= "")
-	
-	Holder:getView("permalink"):setVisible(true)
+    local collapseView = Holder:getView("collapse")
+    collapseView:setVisible(Thing:getReplies() ~= nil and subreddit ~= nil and subreddit ~= "")
+    
+    Holder:getView("permalink"):setVisible(true)
     
     bindViewCommon(Holder, Thing, ListItem)
 end
@@ -322,15 +322,15 @@ function bindViewComment(Holder, Thing, ListItem)
     
     -- comments have vote
     local thingLikes = Thing:getLikes()
-	voteUpButton:setDrawable(thingLikes==true and "up_arrow_red.png" or "up_arrow_holo_light.png")
-	voteDownButton:setDrawable(thingLikes==false and "down_arrow_blue.png" or "down_arrow_holo_light.png")
-	
-	-- comments cannot be collapsed (only mod mail)
-	Holder:getView("collapse"):setVisible(false)
-	
-	-- not enough info to get comment permalink inside inbox
-	-- TODO double check
-	Holder:getView("permalink"):setVisible(false)
+    voteUpButton:setDrawable(thingLikes==true and "up_arrow_red.png" or "up_arrow_holo_light.png")
+    voteDownButton:setDrawable(thingLikes==false and "down_arrow_blue.png" or "down_arrow_holo_light.png")
+    
+    -- comments cannot be collapsed (only mod mail)
+    Holder:getView("collapse"):setVisible(false)
+    
+    -- not enough info to get comment permalink inside inbox
+    -- TODO double check
+    Holder:getView("permalink"):setVisible(false)
    
     bindViewCommon(Holder, Thing, ListItem)
 end

@@ -205,30 +205,30 @@ function newView(Builder)
             local frame = Builder:beginFrameLayout()
             frame:setLayoutSize("wrap_content", "fill_parent")
             frame:setBackground(THUMBNAIL_BGCOLOR)
-            	local thumbnail_frame = Builder:beginFrameLayout("thumbnail_frame")
-            	thumbnail_frame:setLayoutSize("wrap_content", "fill_parent")
-            	thumbnail_frame:setBackground(SELECTABLE_ITEM_BACKGROUND)
-            	
-	                local image = Builder:addImageView("thumbnail_image")
-	                image:setLayoutSize("70dp", "70dp")
-	                
-	                local lin = Builder:beginLinearLayout("thumbnail_icon_frame")
-	                lin:setOrientation("vertical")
-	                lin:setLayoutSize("70dp", "70dp")
-	                lin:setVisibility("gone")
-	                lin:setGravity("center")
-		            	local image = Builder:addImageView("thumbnail_icon")
-		            	image:setLayoutSize("32dp", "32dp")
-		            	
-		            	local label = Builder:addTextView("thumbnail_icon_label")
-		            	label:setLayoutSize("wrap_content", "wrap_content")
-		            	label:setTextSize("12sp")
-	            	Builder:endLinearLayout()
-	    
-	                local progressBar = Builder:addProgressBar("thumbnail_progress")
-	                progressBar:setLayoutSize("70dp", "70dp")
-	                progressBar:setIndeterminate()
-	                progressBar:setVisibility("gone")
+                local thumbnail_frame = Builder:beginFrameLayout("thumbnail_frame")
+                thumbnail_frame:setLayoutSize("wrap_content", "fill_parent")
+                thumbnail_frame:setBackground(SELECTABLE_ITEM_BACKGROUND)
+                
+                    local image = Builder:addImageView("thumbnail_image")
+                    image:setLayoutSize("70dp", "70dp")
+                    
+                    local lin = Builder:beginLinearLayout("thumbnail_icon_frame")
+                    lin:setOrientation("vertical")
+                    lin:setLayoutSize("70dp", "70dp")
+                    lin:setVisibility("gone")
+                    lin:setGravity("center")
+                        local image = Builder:addImageView("thumbnail_icon")
+                        image:setLayoutSize("32dp", "32dp")
+                        
+                        local label = Builder:addTextView("thumbnail_icon_label")
+                        label:setLayoutSize("wrap_content", "wrap_content")
+                        label:setTextSize("12sp")
+                    Builder:endLinearLayout()
+        
+                    local progressBar = Builder:addProgressBar("thumbnail_progress")
+                    progressBar:setLayoutSize("70dp", "70dp")
+                    progressBar:setIndeterminate()
+                    progressBar:setVisibility("gone")
                 Builder:endFrameLayout()
             Builder:endFrameLayout()
     
@@ -243,35 +243,35 @@ function newView(Builder)
         thread_actions:setOrientation("horizontal")
         thread_actions:setGravity("center")
         
-			local function addThreadAction(Builder, containerId, onClick, imageId, drawable, textId, text)
-	            local lin = Builder:beginLinearLayout(containerId)
-	            lin:setOrientation("vertical")
-	            lin:setLayoutSize("0dp", "wrap_content")
-	            lin:setLayoutWeight(1.000000)
-	            lin:setBackground(SELECTABLE_ITEM_BACKGROUND)
-	            lin:setOnClick(onClick)
-	                local image = Builder:addImageView(imageId)
-	                image:setLayoutSize("40dp", "40dp")
-	                image:setLayoutGravity("center")
-	                image:setPadding("4dp")  -- 40 == 32 + 4 + 4
-	                image:setScaleType("fitCenter")
-	                image:setDrawable(drawable)
-	                
-	                local label = Builder:addTextView(textId)
-	                label:setLayoutSize("wrap_content", "wrap_content")
-	                label:setLayoutGravity("center")
-	                label:setGravity("center")
-	                label:setPaddingBottom("4dp")
-	                label:setText(text)
-	                label:setTextSize("12sp")
-	            Builder:endLinearLayout()
-			end
-			
-			addThreadAction(Builder, "share",        "shareThread",       "share_image",        DRAWABLE_SHARE,    "share_text",        SHARE_TEXT)
-			addThreadAction(Builder, "save",         "saveThread",        "save_image",         DRAWABLE_SAVE,     "save_text",         SAVE_TEXT)
-			addThreadAction(Builder, "hide",         "hideThread",        "hide_image",         DRAWABLE_HIDE,     "hide_text",         HIDE_TEXT)
-			addThreadAction(Builder, "more_actions", "moreActionsThread", "more_actions_image", DRAWABLE_MORE,     "more_actions_text", MORE_TEXT)
-			addThreadAction(Builder, "comments",     "openComments",      "comments_image",     DRAWABLE_COMMENTS, "comments_text",     COMMENTS_TEXT)
+            local function addThreadAction(Builder, containerId, onClick, imageId, drawable, textId, text)
+                local lin = Builder:beginLinearLayout(containerId)
+                lin:setOrientation("vertical")
+                lin:setLayoutSize("0dp", "wrap_content")
+                lin:setLayoutWeight(1.000000)
+                lin:setBackground(SELECTABLE_ITEM_BACKGROUND)
+                lin:setOnClick(onClick)
+                    local image = Builder:addImageView(imageId)
+                    image:setLayoutSize("40dp", "40dp")
+                    image:setLayoutGravity("center")
+                    image:setPadding("4dp")  -- 40 == 32 + 4 + 4
+                    image:setScaleType("fitCenter")
+                    image:setDrawable(drawable)
+                    
+                    local label = Builder:addTextView(textId)
+                    label:setLayoutSize("wrap_content", "wrap_content")
+                    label:setLayoutGravity("center")
+                    label:setGravity("center")
+                    label:setPaddingBottom("4dp")
+                    label:setText(text)
+                    label:setTextSize("12sp")
+                Builder:endLinearLayout()
+            end
+            
+            addThreadAction(Builder, "share",        "shareThread",       "share_image",        DRAWABLE_SHARE,    "share_text",        SHARE_TEXT)
+            addThreadAction(Builder, "save",         "saveThread",        "save_image",         DRAWABLE_SAVE,     "save_text",         SAVE_TEXT)
+            addThreadAction(Builder, "hide",         "hideThread",        "hide_image",         DRAWABLE_HIDE,     "hide_text",         HIDE_TEXT)
+            addThreadAction(Builder, "more_actions", "moreActionsThread", "more_actions_image", DRAWABLE_MORE,     "more_actions_text", MORE_TEXT)
+            addThreadAction(Builder, "comments",     "openComments",      "comments_image",     DRAWABLE_COMMENTS, "comments_text",     COMMENTS_TEXT)
         Builder:endViewGroup()
     Builder:endViewGroup()
     
@@ -284,67 +284,67 @@ function newView(Builder)
 end
 
 local function bindTitleAndDomain(textView, Thing)
-	local flairBackgroundColor = "#dddddd"
-	local flairSize = TEXT_SIZE_SMALL
+    local flairBackgroundColor = "#dddddd"
+    local flairSize = TEXT_SIZE_SMALL
     local titleColor = (Thing:isStickied() and "#669900" or (Thing:isClicked() and "#551a8b" or "#0000ff"))
     local titleStyle = ((Thing:isClicked() and not Thing:isStickied()) and "normal" or "bold")
-	local domainColor = "#7f7f7f"
-	local domainSize = TEXT_SIZE_SMALL
-	
-	-- link flair
+    local domainColor = "#7f7f7f"
+    local domainSize = TEXT_SIZE_SMALL
+    
+    -- link flair
     local thingLinkFlairText = Thing:getLink_flair_text()
-	local hasFlair = thingLinkFlairText and "" ~= thingLinkFlairText
-	local flairBuilder
-	if hasFlair then
-		flairBuilder = Spans:addSize(thingLinkFlairText, flairSize)
-		flairBuilder = Spans:addBackgroundColor(flairBuilder, flairBackgroundColor)
-	else
-		flairBuilder = Spans:builder()  -- empty SpannableStringBuilder
-	end
+    local hasFlair = thingLinkFlairText and "" ~= thingLinkFlairText
+    local flairBuilder
+    if hasFlair then
+        flairBuilder = Spans:addSize(thingLinkFlairText, flairSize)
+        flairBuilder = Spans:addBackgroundColor(flairBuilder, flairBackgroundColor)
+    else
+        flairBuilder = Spans:builder()  -- empty SpannableStringBuilder
+    end
     
     -- title
     local titleBuilder = Spans:addColor(Thing:getTitle(), titleColor)
     titleBuilder = Spans:addStyle(titleBuilder, titleStyle)
     
     -- domain
-	local domainBuilder = Spans:addColor("(" .. Thing:getDomain() .. ")", domainColor)
-	domainBuilder = Spans:addSize(domainBuilder, domainSize)
-	
-	-- combine
-	textView:setText(flairBuilder:append(hasFlair and " " or ""):append(titleBuilder):append(" "):append(domainBuilder))
+    local domainBuilder = Spans:addColor("(" .. Thing:getDomain() .. ")", domainColor)
+    domainBuilder = Spans:addSize(domainBuilder, domainSize)
+    
+    -- combine
+    textView:setText(flairBuilder:append(hasFlair and " " or ""):append(titleBuilder):append(" "):append(domainBuilder))
 end
 
 local function getDefaultThumbnail(thumbnailUrl)
-	if not thumbnailUrl then
-		return nil
-	elseif thumbnailUrl:sub(-7) == "default" then
-		return DRAWABLE_THUMBNAIL_DEFAULT
-	elseif thumbnailUrl:sub(-4) == "nsfw" then
-		return DRAWABLE_THUMBNAIL_NSFW
-	elseif thumbnailUrl:sub(-4) == "self" then
-		return DRAWABLE_THUMBNAIL_SELF
-	end
+    if not thumbnailUrl then
+        return nil
+    elseif thumbnailUrl:sub(-7) == "default" then
+        return DRAWABLE_THUMBNAIL_DEFAULT
+    elseif thumbnailUrl:sub(-4) == "nsfw" then
+        return DRAWABLE_THUMBNAIL_NSFW
+    elseif thumbnailUrl:sub(-4) == "self" then
+        return DRAWABLE_THUMBNAIL_SELF
+    end
 end
 
 ---
 -- schedules a layout pass to set the vertical offset of the list item
 local function offsetTop(ListItem)
-	ListItem:setTop(ListItem:getTop())
+    ListItem:setTop(ListItem:getTop())
 end
 
 ---
 -- get the label text for image links
 local function getImageLabelText(urlLower)
-	local last4 = urlLower:sub(-4)
-	if last4 == ".jpg" or last4 == ".gif" or last4 == ".png" then
-		return last4:sub(2)
-	elseif urlLower:sub(-5) == ".jpeg" then
-		return "jpg"
-	elseif urlLower:sub(1, 17) == "http://imgur.com/" or urlLower:sub(1, 19) == "http://i.imgur.com/" then
-		return "imgur"
-	else
-		return nil
-	end
+    local last4 = urlLower:sub(-4)
+    if last4 == ".jpg" or last4 == ".gif" or last4 == ".png" then
+        return last4:sub(2)
+    elseif urlLower:sub(-5) == ".jpeg" then
+        return "jpg"
+    elseif urlLower:sub(1, 17) == "http://imgur.com/" or urlLower:sub(1, 19) == "http://i.imgur.com/" then
+        return "imgur"
+    else
+        return nil
+    end
 end
 
 ---
@@ -361,156 +361,156 @@ function bindView(Holder, Thing, ListItem)
     local thingLikes = Thing:getLikes()
     votes:setText(tostring(thingScore >= 0 and thingScore or 0))
     if thingLikes == true then
-    	local colorArrowRed = "#ffff8b60"
-    	votes:setTextColor(colorArrowRed)
-    	upArrow:setDrawable(DRAWABLE_VOTE_UP_RED)
-    	downArrow:setDrawable(DRAWABLE_VOTE_DOWN_GRAY)
-	elseif thingLikes == false then
-		local colorArrowBlue = "#ff9494ff"
-		votes:setTextColor(colorArrowBlue)
-		upArrow:setDrawable(DRAWABLE_VOTE_UP_GRAY)
-		downArrow:setDrawable(DRAWABLE_VOTE_DOWN_BLUE)
-	else -- thingLikes == nil
-		local colorArrowGray = "#ffc0c0c0"
-		votes:setTextColor(colorArrowGray)
-	    upArrow:setDrawable(DRAWABLE_VOTE_UP_GRAY)
-	    downArrow:setDrawable(DRAWABLE_VOTE_DOWN_GRAY)
-	end
-	
-	local num_reports = Holder:getView("num_reports")
+        local colorArrowRed = "#ffff8b60"
+        votes:setTextColor(colorArrowRed)
+        upArrow:setDrawable(DRAWABLE_VOTE_UP_RED)
+        downArrow:setDrawable(DRAWABLE_VOTE_DOWN_GRAY)
+    elseif thingLikes == false then
+        local colorArrowBlue = "#ff9494ff"
+        votes:setTextColor(colorArrowBlue)
+        upArrow:setDrawable(DRAWABLE_VOTE_UP_GRAY)
+        downArrow:setDrawable(DRAWABLE_VOTE_DOWN_BLUE)
+    else -- thingLikes == nil
+        local colorArrowGray = "#ffc0c0c0"
+        votes:setTextColor(colorArrowGray)
+        upArrow:setDrawable(DRAWABLE_VOTE_UP_GRAY)
+        downArrow:setDrawable(DRAWABLE_VOTE_DOWN_GRAY)
+    end
+    
+    local num_reports = Holder:getView("num_reports")
     local thingNumReports = Thing:getNum_reports()
-	local hasReports = thingNumReports ~= nil and thingNumReports > 0
-	num_reports:setVisible(hasReports)
-	if hasReports then
-		num_reports:setText(string.format(thingNumReports==1 and "%d report" or "%d reports", thingNumReports))
-	end
+    local hasReports = thingNumReports ~= nil and thingNumReports > 0
+    num_reports:setVisible(hasReports)
+    if hasReports then
+        num_reports:setText(string.format(thingNumReports==1 and "%d report" or "%d reports", thingNumReports))
+    end
 
     local thingNumComments = Thing:getNum_comments()
-	Holder:getView("nsfw"):setVisible(Thing:isOver_18())
-	Holder:getView("num_comments"):setText(string.format(thingNumComments==1 and "%d comment" or "%d comments", thingNumComments))
-	Holder:getView("subreddit"):setText(Thing:getSubreddit())
-	Holder:getView("submission_time"):setText(Thing:getCreatedTimeAgo())
-	Holder:getView("submitter"):setText("by "..Thing:getAuthor())
-	Holder:getView("submitter_distinguished_mod"):setVisible(Thing:isModerator())
-	Holder:getView("submitter_distinguished_admin"):setVisible(Thing:isAdmin())
-	Holder:getView("submitter_distinguished_special"):setVisible(Thing:isSpecialAdmin())
-	
-	-- thumbnail
-	local thumbnail = Holder:getView("thumbnail_image")
-	local thumbnail_icon_frame = Holder:getView("thumbnail_icon_frame")
-	local thumbnail_icon = Holder:getView("thumbnail_icon")
-	local thumbnail_icon_label = Holder:getView("thumbnail_icon_label")
-	local thumbnail_progress = Holder:getView("thumbnail_progress")
+    Holder:getView("nsfw"):setVisible(Thing:isOver_18())
+    Holder:getView("num_comments"):setText(string.format(thingNumComments==1 and "%d comment" or "%d comments", thingNumComments))
+    Holder:getView("subreddit"):setText(Thing:getSubreddit())
+    Holder:getView("submission_time"):setText(Thing:getCreatedTimeAgo())
+    Holder:getView("submitter"):setText("by "..Thing:getAuthor())
+    Holder:getView("submitter_distinguished_mod"):setVisible(Thing:isModerator())
+    Holder:getView("submitter_distinguished_admin"):setVisible(Thing:isAdmin())
+    Holder:getView("submitter_distinguished_special"):setVisible(Thing:isSpecialAdmin())
+    
+    -- thumbnail
+    local thumbnail = Holder:getView("thumbnail_image")
+    local thumbnail_icon_frame = Holder:getView("thumbnail_icon_frame")
+    local thumbnail_icon = Holder:getView("thumbnail_icon")
+    local thumbnail_icon_label = Holder:getView("thumbnail_icon_label")
+    local thumbnail_progress = Holder:getView("thumbnail_progress")
     local thingThumbnail = Thing:getThumbnail()
-	local defaultThumbnail = getDefaultThumbnail(thingThumbnail)
-	if defaultThumbnail then
-		thumbnail:setVisibility("visible")
-		thumbnail_icon_frame:setVisibility("gone")
-		thumbnail:setDrawable(defaultThumbnail)
-	elseif thingThumbnail == "" then
-		if Thing:isIs_self() then
-			thumbnail:setVisibility("visible")
-			thumbnail_icon_frame:setVisibility("gone")
-			thumbnail:setDrawable(DRAWABLE_THUMBNAIL_SELF)
-		else	
-			thumbnail:setVisibility("gone")
+    local defaultThumbnail = getDefaultThumbnail(thingThumbnail)
+    if defaultThumbnail then
+        thumbnail:setVisibility("visible")
+        thumbnail_icon_frame:setVisibility("gone")
+        thumbnail:setDrawable(defaultThumbnail)
+    elseif thingThumbnail == "" then
+        if Thing:isIs_self() then
+            thumbnail:setVisibility("visible")
+            thumbnail_icon_frame:setVisibility("gone")
+            thumbnail:setDrawable(DRAWABLE_THUMBNAIL_SELF)
+        else    
+            thumbnail:setVisibility("gone")
             thumbnail:cancelDisplayImage()
-			thumbnail_icon_frame:setVisibility("visible")
-			local urlLower = Thing:getUrl():lower()
-			local imageLabelText = getImageLabelText(urlLower)
-			if imageLabelText then
-				thumbnail_icon:setDrawable(DRAWABLE_IMAGE_LINK)
-				thumbnail_icon_label:setVisibility("visible")
-				thumbnail_icon_label:setText(imageLabelText)
-			else
-				thumbnail_icon:setDrawable(DRAWABLE_WEB_LINK)
-				
-				local isReddit =
-					urlLower:sub(1, 18) == "http://reddit.com/" or
-					urlLower:sub(1, 15) == "http://redd.it/" or
-					urlLower:find("http://[^./]+%.reddit%.com/") ~= nil
-				
-				if isReddit then
-					thumbnail_icon_label:setVisibility("visible")
-					thumbnail_icon_label:setText("reddit")
-				else					
-					thumbnail_icon_label:setVisibility("gone")
-				end
-			end
-		end
-	else
-		thumbnail_icon_frame:setVisibility("gone")
+            thumbnail_icon_frame:setVisibility("visible")
+            local urlLower = Thing:getUrl():lower()
+            local imageLabelText = getImageLabelText(urlLower)
+            if imageLabelText then
+                thumbnail_icon:setDrawable(DRAWABLE_IMAGE_LINK)
+                thumbnail_icon_label:setVisibility("visible")
+                thumbnail_icon_label:setText(imageLabelText)
+            else
+                thumbnail_icon:setDrawable(DRAWABLE_WEB_LINK)
+                
+                local isReddit =
+                    urlLower:sub(1, 18) == "http://reddit.com/" or
+                    urlLower:sub(1, 15) == "http://redd.it/" or
+                    urlLower:find("http://[^./]+%.reddit%.com/") ~= nil
+                
+                if isReddit then
+                    thumbnail_icon_label:setVisibility("visible")
+                    thumbnail_icon_label:setText("reddit")
+                else                    
+                    thumbnail_icon_label:setVisibility("gone")
+                end
+            end
+        end
+    else
+        thumbnail_icon_frame:setVisibility("gone")
         -- displayThumbnailImageWithProgress will handle visibility of thumbnail and thumbnail_progress
         thumbnail:displayThumbnailImageWithProgress(thingThumbnail, thumbnail_progress)
     end
-	
-	local thread_actions = Holder:getView("thread_actions")
+    
+    local thread_actions = Holder:getView("thread_actions")
 
     local thumbnail_frame = Holder:getView("thumbnail_frame")
     thumbnail_frame:setOnClick(function(v)
-		-- hide the actions, then delegate to reddit-is-fun built-in method "clickThumbnail"
-		if shared_state.show_thread_actions then
-			thread_actions:collapseVertical(EXPAND_ANIMATION_DURATION_MILLIS)
-		end
-		shared_state.show_thread_actions = false
-		v:onClick("clickThumbnail")
-		offsetTop(ListItem)
-	end)
-	
-	--
-	-- actions
-	--
+        -- hide the actions, then delegate to reddit-is-fun built-in method "clickThumbnail"
+        if shared_state.show_thread_actions then
+            thread_actions:collapseVertical(EXPAND_ANIMATION_DURATION_MILLIS)
+        end
+        shared_state.show_thread_actions = false
+        v:onClick("clickThumbnail")
+        offsetTop(ListItem)
+    end)
+    
+    --
+    -- actions
+    --
 
     local isListItemChecked = ListItem:isChecked()
-	thread_actions:setVisible(isListItemChecked and shared_state.show_thread_actions)
-	
---	OnClick:setOnClick(Holder:getView("thread_info_layout"), function(v)
-	Holder:getView("thread_info_layout"):setOnClick(function(v)
-		if ListItem:isChecked() then
-			-- keep it checked (like a temp bookmark) but toggle actions visibility
-			shared_state.show_thread_actions = not shared_state.show_thread_actions
-			if shared_state.show_thread_actions then
-				thread_actions:expandVertical(EXPAND_ANIMATION_DURATION_MILLIS)
-			else
-				thread_actions:collapseVertical(EXPAND_ANIMATION_DURATION_MILLIS)
-			end
-		else
-			-- not checked; check it
-			if not shared_state.show_thread_actions then
-				-- show actions. animate only if not already showing on another list item
-				shared_state.show_thread_actions = true
-				thread_actions:expandVertical(EXPAND_ANIMATION_DURATION_MILLIS)
-			else
-				-- if already showing on another list item, skip animation to avoid jarring visual effect
-				thread_actions:expandVertical(0)
-			end
-			ListItem:toggleChecked()
-			offsetTop(ListItem)
-		end
-	end)
-	
-	if isListItemChecked then
-		Holder:getView("root"):setBackground(CHECKED_BGCOLOR)
-		
-		if Thing:isSaved() then
-			Holder:getView("save_image"):setDrawable(DRAWABLE_UNSAVE)
-			Holder:getView("save_text"):setText(UNSAVE_TEXT)
-		else
-			Holder:getView("save_image"):setDrawable(DRAWABLE_SAVE)
-			Holder:getView("save_text"):setText(SAVE_TEXT)
-		end
-		
-		if Thing:isHidden() then
-			Holder:getView("hide_text"):setText(UNHIDE_TEXT)
-		else
-			Holder:getView("hide_text"):setText(HIDE_TEXT)
-		end
-	else
-		if Thing:isClicked() then
-			Holder:getView("root"):setBackground(CLICKED_BGCOLOR)
-		else
-			Holder:getView("root"):setBackground("#ffffff")
-		end
-	end
+    thread_actions:setVisible(isListItemChecked and shared_state.show_thread_actions)
+    
+--    OnClick:setOnClick(Holder:getView("thread_info_layout"), function(v)
+    Holder:getView("thread_info_layout"):setOnClick(function(v)
+        if ListItem:isChecked() then
+            -- keep it checked (like a temp bookmark) but toggle actions visibility
+            shared_state.show_thread_actions = not shared_state.show_thread_actions
+            if shared_state.show_thread_actions then
+                thread_actions:expandVertical(EXPAND_ANIMATION_DURATION_MILLIS)
+            else
+                thread_actions:collapseVertical(EXPAND_ANIMATION_DURATION_MILLIS)
+            end
+        else
+            -- not checked; check it
+            if not shared_state.show_thread_actions then
+                -- show actions. animate only if not already showing on another list item
+                shared_state.show_thread_actions = true
+                thread_actions:expandVertical(EXPAND_ANIMATION_DURATION_MILLIS)
+            else
+                -- if already showing on another list item, skip animation to avoid jarring visual effect
+                thread_actions:expandVertical(0)
+            end
+            ListItem:toggleChecked()
+            offsetTop(ListItem)
+        end
+    end)
+    
+    if isListItemChecked then
+        Holder:getView("root"):setBackground(CHECKED_BGCOLOR)
+        
+        if Thing:isSaved() then
+            Holder:getView("save_image"):setDrawable(DRAWABLE_UNSAVE)
+            Holder:getView("save_text"):setText(UNSAVE_TEXT)
+        else
+            Holder:getView("save_image"):setDrawable(DRAWABLE_SAVE)
+            Holder:getView("save_text"):setText(SAVE_TEXT)
+        end
+        
+        if Thing:isHidden() then
+            Holder:getView("hide_text"):setText(UNHIDE_TEXT)
+        else
+            Holder:getView("hide_text"):setText(HIDE_TEXT)
+        end
+    else
+        if Thing:isClicked() then
+            Holder:getView("root"):setBackground(CLICKED_BGCOLOR)
+        else
+            Holder:getView("root"):setBackground("#ffffff")
+        end
+    end
 end
 

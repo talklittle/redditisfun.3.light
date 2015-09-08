@@ -84,8 +84,8 @@ end
 ---
 -- http://lua-users.org/wiki/FormattingNumbers
 local function comma_value(n) -- credit http://richard.warburton.it
-	local left,num,right = string.match(n,'^([^%d]*%d)(%d*)(.-)$')
-	return left..(num:reverse():gsub('(%d%d%d)','%1,'):reverse())..right
+    local left,num,right = string.match(n,'^([^%d]*%d)(%d*)(.-)$')
+    return left..(num:reverse():gsub('(%d%d%d)','%1,'):reverse())..right
 end
 
 ---
@@ -93,7 +93,7 @@ end
 -- @usage exported
 function bindView(Holder, Thing, ListItem)
     if Thing then
-    	Holder:getView("link_karma"):setText(comma_value(Thing:getLink_karma()))
-    	Holder:getView("comment_karma"):setText(comma_value(Thing:getComment_karma()))
+        Holder:getView("link_karma"):setText(comma_value(Thing:getLink_karma()))
+        Holder:getView("comment_karma"):setText(comma_value(Thing:getComment_karma()))
     end
 end

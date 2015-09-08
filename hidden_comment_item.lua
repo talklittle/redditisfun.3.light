@@ -22,35 +22,35 @@ local Toasts = redditisfun.Toasts
 ---
 -- @usage exported
 function newView(Builder)
-	local view1 = Builder:beginLinearLayout("root_container")
-	view1:setLayoutSize("fill_parent", "wrap_content")
-	view1:setOrientation("horizontal")
-	view1:setBackground(SELECTABLE_ITEM_BACKGROUND)
-		local function addIndent(viewId)
-			local left_indent = Builder:addView(viewId)
-			left_indent:setLayoutSize("1dp", "fill_parent")
-			left_indent:setLayoutMarginLeft("5dp")
-			left_indent:setLayoutMarginRight("4dp")
-			left_indent:setBackground("#ffdfdfdf")
-		end
-		
-		addIndent("left_indent1")
-		addIndent("left_indent2")
-		addIndent("left_indent3")
-		addIndent("left_indent4")
-		addIndent("left_indent5")
-		addIndent("left_indent6")
-		addIndent("left_indent7")
-		addIndent("left_indent8")
-		addIndent("left_indent9")
-		addIndent("left_indent10")
+    local view1 = Builder:beginLinearLayout("root_container")
+    view1:setLayoutSize("fill_parent", "wrap_content")
+    view1:setOrientation("horizontal")
+    view1:setBackground(SELECTABLE_ITEM_BACKGROUND)
+        local function addIndent(viewId)
+            local left_indent = Builder:addView(viewId)
+            left_indent:setLayoutSize("1dp", "fill_parent")
+            left_indent:setLayoutMarginLeft("5dp")
+            left_indent:setLayoutMarginRight("4dp")
+            left_indent:setBackground("#ffdfdfdf")
+        end
+        
+        addIndent("left_indent1")
+        addIndent("left_indent2")
+        addIndent("left_indent3")
+        addIndent("left_indent4")
+        addIndent("left_indent5")
+        addIndent("left_indent6")
+        addIndent("left_indent7")
+        addIndent("left_indent8")
+        addIndent("left_indent9")
+        addIndent("left_indent10")
 
-	    local view2 = Builder:beginLinearLayout("view2")
-	    view2:setLayoutSize("0dp", "wrap_content")
-	    view2:setLayoutWeight(1.000000)
-	    view2:setOrientation("horizontal")
-	    view2:setPadding("5dp", "8dp", "5dp", "8dp")
-	
+        local view2 = Builder:beginLinearLayout("view2")
+        view2:setLayoutSize("0dp", "wrap_content")
+        view2:setLayoutWeight(1.000000)
+        view2:setOrientation("horizontal")
+        view2:setPadding("5dp", "8dp", "5dp", "8dp")
+    
             local submitter = Builder:addTextView("submitter")
             submitter:setLayoutSize("wrap_content", "wrap_content")
             submitter:setLayoutMarginRight("5dip")
@@ -134,59 +134,59 @@ function newView(Builder)
                 comment_hidden:setEllipsize("marquee")
             Builder:endViewGroup()
 
-	    Builder:endViewGroup()
-	
-	Builder:endViewGroup()
-	
-	Fonts:registerNormal("Roboto", "fonts/Roboto-Regular.ttf")
-	Fonts:registerBold("Roboto", "fonts/Roboto-Bold.ttf")
-	Fonts:registerItalic("Roboto", "fonts/Roboto-Italic.ttf")
-	Fonts:registerBoldItalic("Roboto", "fonts/Roboto-BoldItalic.ttf")
-	view1:setTypeface("Roboto")
-	
+        Builder:endViewGroup()
+    
+    Builder:endViewGroup()
+    
+    Fonts:registerNormal("Roboto", "fonts/Roboto-Regular.ttf")
+    Fonts:registerBold("Roboto", "fonts/Roboto-Bold.ttf")
+    Fonts:registerItalic("Roboto", "fonts/Roboto-Italic.ttf")
+    Fonts:registerBoldItalic("Roboto", "fonts/Roboto-BoldItalic.ttf")
+    view1:setTypeface("Roboto")
+    
 end
 
 ---
 -- @usage exported
 function bindView(Holder, Thing, ListItem)
-	-- indentation
+    -- indentation
     local thingNestingLevel = Thing:getNestingLevel()
-	for i = 1,10 do
-	    Holder:getView("left_indent" .. i):setVisible(thingNestingLevel >= i)
-	end
-	
-	--
-	-- comment info
-	--
-	local submitter = Holder:getView("submitter")
-	submitter:setText(Thing:getAuthor())
+    for i = 1,10 do
+        Holder:getView("left_indent" .. i):setVisible(thingNestingLevel >= i)
+    end
+    
+    --
+    -- comment info
+    --
+    local submitter = Holder:getView("submitter")
+    submitter:setText(Thing:getAuthor())
 
     local isThingOp = Thing:isOp()
     local isThingModerator = Thing:isModerator()
     local isThingAdmin = Thing:isAdmin()
     local isThingSpecialAdmin = Thing:isSpecialAdmin()
-	if isThingOp then
-		submitter:setTextColor(TEXT_COLOR_OP)
-	elseif isThingModerator then
-		submitter:setTextColor(TEXT_COLOR_MODERATOR)
-	elseif isThingAdmin then
-		submitter:setTextColor(TEXT_COLOR_ADMIN)
-	elseif isThingSpecialAdmin then
-		submitter:setTextColor(TEXT_COLOR_SPECIAL_ADMIN)
-	else
-		submitter:setTextColor(TEXT_COLOR_SUBMITTER)
-	end
-	Holder:getView("submitter_distinguished_op"):setVisible(isThingOp)
-	Holder:getView("submitter_distinguished_mod"):setVisible(isThingModerator)
-	Holder:getView("submitter_distinguished_admin"):setVisible(isThingAdmin)
-	Holder:getView("submitter_distinguished_special"):setVisible(isThingSpecialAdmin)
-		
-	local score = Thing:getUps() - Thing:getDowns()
+    if isThingOp then
+        submitter:setTextColor(TEXT_COLOR_OP)
+    elseif isThingModerator then
+        submitter:setTextColor(TEXT_COLOR_MODERATOR)
+    elseif isThingAdmin then
+        submitter:setTextColor(TEXT_COLOR_ADMIN)
+    elseif isThingSpecialAdmin then
+        submitter:setTextColor(TEXT_COLOR_SPECIAL_ADMIN)
+    else
+        submitter:setTextColor(TEXT_COLOR_SUBMITTER)
+    end
+    Holder:getView("submitter_distinguished_op"):setVisible(isThingOp)
+    Holder:getView("submitter_distinguished_mod"):setVisible(isThingModerator)
+    Holder:getView("submitter_distinguished_admin"):setVisible(isThingAdmin)
+    Holder:getView("submitter_distinguished_special"):setVisible(isThingSpecialAdmin)
+        
+    local score = Thing:getUps() - Thing:getDowns()
     if Thing:isScore_hidden() then
         Holder:getView("num_points"):setText("[~] points")
     else
         Holder:getView("num_points"):setText(string.format(score==1 and "%d point" or "%d points", score))
     end
-	Holder:getView("submission_time"):setText(Thing:getCreatedTimeAgo())
-	--Holder:getView("comment_gild"):setVisible(Thing:getGilded() > 0)
+    Holder:getView("submission_time"):setText(Thing:getCreatedTimeAgo())
+    --Holder:getView("comment_gild"):setVisible(Thing:getGilded() > 0)
 end
