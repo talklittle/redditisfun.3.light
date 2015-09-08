@@ -350,14 +350,16 @@ function bindView(Holder, Thing, ListItem)
     end
     
     local num_reports = Holder:getView("num_reports")
-    local hasReports = Thing:getNum_reports() ~= nil and Thing:getNum_reports() > 0
+    local thingNumReports = Thing:getNum_reports()
+    local hasReports = thingNumReports ~= nil and thingNumReports > 0
     num_reports:setVisible(hasReports)
     if hasReports then
-        num_reports:setText(string.format(Thing:getNum_reports()==1 and "%d report" or "%d reports", Thing:getNum_reports()))
+        num_reports:setText(string.format(thingNumReports==1 and "%d report" or "%d reports", thingNumReports))
     end
-    
+
+    local thingNumComments = Thing:getNum_comments()
     Holder:getView("nsfw"):setVisible(Thing:isOver_18())
-    Holder:getView("num_comments"):setText(string.format(Thing:getNum_comments()==1 and "%d comment" or "%d comments", Thing:getNum_comments()))
+    Holder:getView("num_comments"):setText(string.format(thingNumComments==1 and "%d comment" or "%d comments", thingNumComments))
     Holder:getView("subreddit"):setText(Thing:getSubreddit())
     Holder:getView("submission_time"):setText(Thing:getCreatedTimeAgo())
     Holder:getView("submitter"):setText("by "..Thing:getAuthor())
@@ -435,14 +437,16 @@ function bindView(Holder, Thing, ListItem)
 
     -- selftext
     local selftext = Holder:getView("selftext")
-    if Thing:getRenderedSelftext() then
+    local thingRenderedSelftext = Thing:getRenderedSelftext()
+    local thingSelftext = Thing:getSelftext()
+    if thingRenderedSelftext then
         -- TODO catch ArrayIndexOutOfBoundsException
         -- JellyBean bug http://code.google.com/p/android/issues/detail?id=34872
-        selftext:setText(Thing:getRenderedSelftext())
+        selftext:setText(thingRenderedSelftext)
     else
-        selftext:setText(Thing:getSelftext())
+        selftext:setText(thingSelftext)
     end
-    selftext:setVisible(Thing:getSelftext() and "" ~= Thing:getSelftext())
+    selftext:setVisible(thingSelftext and "" ~= thingSelftext)
     selftext:setMovementMethod("LinkMovementMethod")
     
 end
