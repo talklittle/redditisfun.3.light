@@ -9,8 +9,10 @@ local TEXT_COLOR_OP            = "#ff0000ff"
 local TEXT_COLOR_MODERATOR     = "#ff228822"
 local TEXT_COLOR_ADMIN         = "#ffff0011"
 local TEXT_COLOR_SPECIAL_ADMIN = "#BE1337"
+local TEXT_COLOR_GILDED        = "#99895F"
 
-local TEXT_SIZE_BODY = TEXT_SIZE_SMALL * 1.1
+local TEXT_SIZE_BODY   = TEXT_SIZE_SMALL * 1.1
+local TEXT_SIZE_GILDED = TEXT_SIZE_SMALL * 0.9
 
 -- http://colllor.com/33b5e5
 local CHECKED_BGCOLOR = "#DBF2FA"
@@ -55,6 +57,7 @@ function newView(Builder)
             local view12 = Builder:beginLinearLayout("view12")
             view12:setLayoutSize("wrap_content", "wrap_content")
             view12:setOrientation("horizontal")
+            view12:setGravity("center_vertical")
     
                 local view13 = Builder:beginFrameLayout("view13")
                 view13:setLayoutSize("wrap_content", "wrap_content")
@@ -121,6 +124,7 @@ function newView(Builder)
                 local view17 = Builder:beginLinearLayout("view17")
                 view17:setLayoutSize("wrap_content", "wrap_content")
                 view17:setOrientation("horizontal")
+                view17:setGravity("center_vertical")
                     local flair = Builder:addTextView("flair")
                     flair:setLayoutSize("0dp", "wrap_content")
                     flair:setLayoutWeight(1.000000)
@@ -145,11 +149,23 @@ function newView(Builder)
                     submission_time:setTextColor(TEXT_COLOR_SECONDARY)
                     submission_time:setSingleLine()
                     submission_time:setEllipsize("marquee")
-                    local comment_gild = Builder:addImageView("comment_gild")
-                    comment_gild:setLayoutSize("13dp", "14dp")
-                    comment_gild:setLayoutGravity("center")
-                    comment_gild:setScaleType("fitXY")
-                    comment_gild:setDrawable("comment_gild.png")
+                    local comment_gild_container = Builder:beginLinearLayout("comment_gild_container")
+                    comment_gild_container:setLayoutSize("wrap_content", "wrap_content")
+                    comment_gild_container:setOrientation("horizontal")
+                    comment_gild_container:setGravity("center_vertical")
+                        local comment_gild_icon = Builder:addImageView("comment_gild_icon")
+                        comment_gild_icon:setLayoutSize("13dp", "14dp")
+                        comment_gild_icon:setLayoutGravity("center")
+                        comment_gild_icon:setLayoutMarginRight("1dp")
+                        comment_gild_icon:setScaleType("fitCenter")
+                        comment_gild_icon:setDrawable("comment_gild.png")
+
+                        local comment_gild_text = Builder:addTextView("comment_gild_text")
+                        comment_gild_text:setLayoutSize("wrap_content", "wrap_content")
+                        comment_gild_text:setTextColor(TEXT_COLOR_GILDED)
+                        comment_gild_text:setTextSize(TEXT_SIZE_GILDED)
+                        comment_gild_text:setSingleLine()
+                    Builder:endViewGroup()
                 Builder:endViewGroup()
     
             Builder:endViewGroup()
@@ -311,7 +327,14 @@ function bindView(Holder, Thing, ListItem)
         Holder:getView("num_points"):setText(string.format(score==1 and "%d point" or "%d points", score))
     end
     Holder:getView("submission_time"):setText(Thing:getCreatedTimeAgo())
-    Holder:getView("comment_gild"):setVisible(Thing:getGilded() > 0)
+
+    local gildedCount = Thing:getGilded()
+    Holder:getView("comment_gild_icon"):setVisible(gildedCount > 0)
+    if gildedCount > 1 then
+        Holder:getView("comment_gild_text"):setText("x" .. gildedCount)
+    else
+        Holder:getView("comment_gild_text"):setText("")
+    end
     
     -- flair
     local flairView = Holder:getView("flair")
