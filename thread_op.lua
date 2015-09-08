@@ -40,7 +40,10 @@ local CLICKED_BGCOLOR = "#EBEBEB"
 --local THUMBNAIL_BGCOLOR = "#DEDEDE"
 local THUMBNAIL_BGCOLOR = ""
 
-local TEXT_SIZE_BODY = TEXT_SIZE_SMALL * 1.1
+local TEXT_COLOR_GILDED = "#99895F"
+
+local TEXT_SIZE_BODY   = TEXT_SIZE_SMALL * 1.1
+local TEXT_SIZE_GILDED = TEXT_SIZE_SMALL * 0.9
 
 ---
 -- @usage exported
@@ -161,6 +164,7 @@ function newView(Builder)
                 local view10 = Builder:beginLinearLayout("view10")
                 view10:setLayoutSize("wrap_content", "wrap_content")
                 view10:setOrientation("horizontal")
+                view10:setGravity("center_vertical")
                     local submission_time = Builder:addTextView("submission_time")
                     submission_time:setLayoutSize("wrap_content", "wrap_content")
                     submission_time:setLayoutMarginRight("4dip")
@@ -197,12 +201,31 @@ function newView(Builder)
 
                     local user_flair = Builder:addTextView("user_flair")
                     user_flair:setLayoutSize("wrap_content", "wrap_content")
+                    user_flair:setLayoutMarginRight("5dip")
                     user_flair:setVisibility("gone")
                     user_flair:setTextSize(TEXT_SIZE_SMALL)
                     user_flair:setTextColor(TEXT_COLOR_SECONDARY)
                     user_flair:setBackground("#dfdfdf")
                     user_flair:setEllipsize("end")
                     user_flair:setSingleLine(true)
+
+                    local thread_gild_container = Builder:beginLinearLayout("thread_gild_container")
+                    thread_gild_container:setLayoutSize("wrap_content", "wrap_content")
+                    thread_gild_container:setOrientation("horizontal")
+                    thread_gild_container:setGravity("center_vertical")
+                        local thread_gild_icon = Builder:addImageView("thread_gild_icon")
+                        thread_gild_icon:setLayoutSize("13dp", "14dp")
+                        thread_gild_icon:setLayoutGravity("center")
+                        thread_gild_icon:setLayoutMarginRight("1dp")
+                        thread_gild_icon:setScaleType("fitCenter")
+                        thread_gild_icon:setDrawable("comment_gild.png")
+                    
+                        local thread_gild_text = Builder:addTextView("thread_gild_text")
+                        thread_gild_text:setLayoutSize("wrap_content", "wrap_content")
+                        thread_gild_text:setTextColor(TEXT_COLOR_GILDED)
+                        thread_gild_text:setTextSize(TEXT_SIZE_GILDED)
+                        thread_gild_text:setSingleLine()
+                    Builder:endViewGroup()
                 Builder:endViewGroup()
     
             Builder:endViewGroup()
@@ -433,6 +456,14 @@ function bindView(Holder, Thing, ListItem)
         userFlairView:setText(userFlair)
     else
         userFlairView:setVisible(false)
+    end
+
+    local gildedCount = Thing:getGilded()
+    Holder:getView("thread_gild_icon"):setVisible(gildedCount > 0)
+    if gildedCount > 1 then
+        Holder:getView("thread_gild_text"):setText("x" .. gildedCount)
+    else
+        Holder:getView("thread_gild_text"):setText("")
     end
 
     -- selftext
