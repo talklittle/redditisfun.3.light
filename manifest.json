@@ -23,11 +23,6 @@
             "bind_view": "bindView"
         },
         
-        "comments_thread": {
-            "file": "thread_op.lua",
-            "new_view": "newView",
-            "bind_view": "bindView"
-        },
         "comments_comment": {
             "file": "comment_item.lua",
             "new_view": "newView",
