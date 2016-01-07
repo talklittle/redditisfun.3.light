@@ -238,7 +238,6 @@ function newView(Builder)
     
         local thread_actions = Builder:beginLinearLayout("thread_actions")
         thread_actions:setLayoutSize("fill_parent", "wrap_content")
-        thread_actions:setLayoutMarginBottom("-60dp")  -- negative bottom margin for Expand animation
         thread_actions:setBackground(ACTIONS_BGCOLOR)
         thread_actions:setOrientation("horizontal")
         thread_actions:setGravity("center")
@@ -450,7 +449,8 @@ function bindView(Holder, Thing, ListItem)
     thumbnail_frame:setOnClick(function(v)
         -- hide the actions, then delegate to reddit-is-fun built-in method "clickThumbnail"
         if shared_state.show_thread_actions then
-            thread_actions:collapseVertical(EXPAND_ANIMATION_DURATION_MILLIS)
+            thread_actions:setVisible(false)
+            ListItem:notifyItemChanged()
         end
         shared_state.show_thread_actions = false
         v:onClick("clickThumbnail")
@@ -464,28 +464,24 @@ function bindView(Holder, Thing, ListItem)
     local isListItemChecked = ListItem:isChecked()
     thread_actions:setVisible(isListItemChecked and shared_state.show_thread_actions)
     
---    OnClick:setOnClick(Holder:getView("thread_info_layout"), function(v)
     Holder:getView("thread_info_layout"):setOnClick(function(v)
         if ListItem:isChecked() then
             -- keep it checked (like a temp bookmark) but toggle actions visibility
             shared_state.show_thread_actions = not shared_state.show_thread_actions
-            if shared_state.show_thread_actions then
-                thread_actions:expandVertical(EXPAND_ANIMATION_DURATION_MILLIS)
-            else
-                thread_actions:collapseVertical(EXPAND_ANIMATION_DURATION_MILLIS)
-            end
+            thread_actions:setVisible(shared_state.show_thread_actions)
+            ListItem:notifyItemChanged()
         else
             -- not checked; check it
-            if not shared_state.show_thread_actions then
-                -- show actions. animate only if not already showing on another list item
-                shared_state.show_thread_actions = true
-                thread_actions:expandVertical(EXPAND_ANIMATION_DURATION_MILLIS)
-            else
-                -- if already showing on another list item, skip animation to avoid jarring visual effect
-                thread_actions:expandVertical(0)
-            end
             ListItem:toggleChecked()
             offsetTop(ListItem)
+
+            if shared_state.show_thread_actions then
+                -- if already showing on another list item, skip animation to avoid jarring visual effect
+                ListItem:skipAllItemsAnimationOnce()
+            end
+
+            shared_state.show_thread_actions = true
+            ListItem:notifyItemChanged()
         end
     end)
     
