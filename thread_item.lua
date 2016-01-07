@@ -450,7 +450,6 @@ function bindView(Holder, Thing, ListItem)
         -- hide the actions, then delegate to reddit-is-fun built-in method "clickThumbnail"
         if shared_state.show_thread_actions then
             thread_actions:setVisible(false)
-            ListItem:notifyItemChanged()
         end
         shared_state.show_thread_actions = false
         v:onClick("clickThumbnail")
@@ -469,7 +468,6 @@ function bindView(Holder, Thing, ListItem)
             -- keep it checked (like a temp bookmark) but toggle actions visibility
             shared_state.show_thread_actions = not shared_state.show_thread_actions
             thread_actions:setVisible(shared_state.show_thread_actions)
-            ListItem:notifyItemChanged()
         else
             -- not checked; check it
             ListItem:toggleChecked()
@@ -481,8 +479,9 @@ function bindView(Holder, Thing, ListItem)
             end
 
             shared_state.show_thread_actions = true
-            ListItem:notifyItemChanged()
         end
+
+        ListItem:animateItemChanged()
     end)
     
     if isListItemChecked then
