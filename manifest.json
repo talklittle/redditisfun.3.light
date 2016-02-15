@@ -2,10 +2,10 @@
     "id": "redditisfun.3.light",
     "name": "reddit is fun 3 light",
     
-    "version": 22,
-    "app_version_code": 319,
-    "app_version_name": "3.3.11",
-    "api_level": 15,
+    "version": 23,
+    "app_version_code": 800,
+    "app_version_name": "4.0.0",
+    "api_level": 16,
     
     "android_theme": "Reddit_Light",
 
