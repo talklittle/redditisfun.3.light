@@ -467,7 +467,6 @@ function bindView(Holder, Thing, ListItem)
         if ListItem:isChecked() then
             -- keep it checked (like a temp bookmark) but toggle actions visibility
             shared_state.show_thread_actions = not shared_state.show_thread_actions
-            thread_actions:setVisible(shared_state.show_thread_actions)
         else
             -- not checked; check it
             ListItem:toggleChecked()
@@ -481,7 +480,7 @@ function bindView(Holder, Thing, ListItem)
             shared_state.show_thread_actions = true
         end
 
-        ListItem:animateItemChanged()
+        ListItem:notifyItemChanged()
     end)
     
     if isListItemChecked then
