@@ -9,10 +9,6 @@
     
     "android_theme": "Reddit_Light",
 
-    "app_bar_color": "#CDE3F9",
-    "status_bar_color": "#ff9aadc2",
-    "tab_indicator_color": "#336699",
-
     "ad_placement": "list",
     
     "scripts": {
