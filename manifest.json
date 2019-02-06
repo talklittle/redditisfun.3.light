@@ -13,14 +13,6 @@
     "status_bar_color": "#ff9aadc2",
     "tab_indicator_color": "#336699",
 
-    "subreddit_colors": {
-        "EarthPorn": {
-            "app_bar_color": "#00dd66",
-            "status_bar_color": "#008844",
-            "tab_indicator_color": "#0000ff"
-        }
-    },
-
     "ad_placement": "list",
     
     "scripts": {
