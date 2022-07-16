@@ -249,8 +249,6 @@ local function bindViewCommon(Holder, Thing, ListItem)
     local bodyView = Holder:getView("body")
     local thingRenderedBody = Thing:getRenderedBody()
     if thingRenderedBody then
-        -- TODO catch ArrayIndexOutOfBoundsException
-        -- JellyBean bug http://code.google.com/p/android/issues/detail?id=34872
         bodyView:setText(thingRenderedBody)
     else
         bodyView:setText(Thing:getBody())

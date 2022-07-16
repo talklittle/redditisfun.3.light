@@ -466,8 +466,6 @@ function bindView(Holder, Thing, ListItem)
     local thingRenderedSelftext = Thing:getRenderedSelftext()
     local thingSelftext = Thing:getSelftext()
     if thingRenderedSelftext then
-        -- TODO catch ArrayIndexOutOfBoundsException
-        -- JellyBean bug http://code.google.com/p/android/issues/detail?id=34872
         selftext:setText(thingRenderedSelftext)
     else
         selftext:setText(thingSelftext)
